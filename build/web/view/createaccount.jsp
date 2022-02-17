@@ -24,7 +24,7 @@
     <body>
         <div class="container">
 
-            <form class="well form-horizontal" action="" method="post"  id="contact_form">
+            <form class="well form-horizontal" action="createaccount" method="post"  id="contact_form">
                 <fieldset>
                     <!-- Form Name -->
                     <legend><center><h2><b>Registration</b></h2></center></legend><br>
