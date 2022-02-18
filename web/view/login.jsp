@@ -10,8 +10,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>login Page</title>
-       
-
     </head>
     <body>
         <div class="row">
