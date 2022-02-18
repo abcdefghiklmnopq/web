@@ -6,8 +6,8 @@
 package dal;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
@@ -17,36 +17,73 @@ import model.Account;
  * @author thand
  */
 public class AccountDBContext extends DBContext {
-
-    public ArrayList<Account> getAccount(String email) {
-        ArrayList<Account> Accounts = new ArrayList<>();
-        String sql = "SELECT [email]\n"
-                + "      ,[password]\n"
-                + "  FROM [account] a\n"
-                + "  where a.email = ?";
-        
+    
+    public  Account getAccount(String email, String password){
+         Account Account = new Account();
+        String sql = "SELECT [email]\n" +
+                        "      ,[phone]\n" +
+                        "      ,[firstname]\n" +
+                        "      ,[lastname]\n" +
+                        "      ,[gender]\n" +
+                        "      ,[dob]\n" +
+                        "      ,[password]\n" +
+                        "  FROM [account] a\n" +
+                        "  where a.email =? and a.password =?";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, email);
+            stm.setString(2, password);
+            stm.executeQuery();
+             ResultSet rs = stm.executeQuery();
+            if(rs.next())
+            {
+                Account account = new Account();
+                account.setEmail(rs.getString("email"));
+                account.setPhone(rs.getString("phone"));
+                account.setFirstname(rs.getString("firstname"));
+                account.setLastname(rs.getString("lastname"));
+                account.setGender(rs.getBoolean("gender"));
+                account.setDob(rs.getDate("dob"));
+                account.setPassword(rs.getString("password"));
+                return account;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        return Accounts;
+        return null;
     }
 
-    public void insertAccount(Account s) {
+    public  boolean IsEmail(String email) {
+        String sql = "SELECT [email]\n"
+                + "  FROM [account] a\n"
+                + "  where a.email = ?";
+        try {
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, email);
+            stm.executeQuery();
+             ResultSet rs = stm.executeQuery();
+            if(rs.next())
+            {
+                
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public  void insertAccount(Account s) {
         String sql = "INSERT INTO [account]\n"
                 + "           ([email]\n"
                 + "           ,[phone]\n"
                 + "           ,[firstname]\n"
                 + "           ,[lastname]\n"
-                + "           ,[passportID]\n"
                 + "           ,[gender]\n"
                 + "           ,[dob]\n"
                 + "           ,[password])\n"
                 + "     VALUES\n"
                 + "           (?\n"
-                + "           ,?\n"
                 + "           ,?\n"
                 + "           ,?\n"
                 + "           ,?\n"
@@ -58,9 +95,9 @@ public class AccountDBContext extends DBContext {
         try {
             stm = connection.prepareStatement(sql);
             stm.setString(1, s.getEmail());
-            stm.setString(2, s.getFirstname());
-            stm.setString(3, s.getLastname());
-            stm.setString(4, s.getPassportID());
+            stm.setString(2, s.getPhone());
+            stm.setNString(3, s.getFirstname());
+            stm.setNString(4, s.getLastname());
             stm.setBoolean(5, s.isGender());
             stm.setDate(6, s.getDob());
             stm.setString(7, s.getPassword());

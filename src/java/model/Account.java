@@ -16,7 +16,6 @@ public class Account {
     private String phone;
     private String firstname;
     private String lastname;
-    private String passportID;
     private boolean gender;
     private Date dob;
     private String password;
@@ -52,15 +51,7 @@ public class Account {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
-
-    public String getPassportID() {
-        return passportID;
-    }
-
-    public void setPassportID(String passportID) {
-        this.passportID = passportID;
-    }
-
+   
     public boolean isGender() {
         return gender;
     }
