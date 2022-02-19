@@ -15,13 +15,16 @@
         <div class="row">
             <div class="colm-form">
                 <div class="form-container">
+                    
                     <form action="../login" method="POST">
                        <input type="text" placeholder="Email address" name="email">
                          <input type="password" placeholder="Password" name="password">
                         <input type="submit" class="btn-login"  value="login"/>
                     </form>
+                    
                     <a href="createaccount.jsp">Forgotten password?</a>
                     <a  href="createaccount.jsp" class="btn-new">Create new Account</a>
+                
                 </div>
             </div>
         </div>
