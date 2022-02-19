@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 
 
 public class JsonReader {
-
+    
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
         int cp;
@@ -31,7 +31,6 @@ public class JsonReader {
         }
         return sb.toString();
     }
-
     public static String readJsonFromUrl(String url) throws IOException{
         InputStream is = new URL(url).openStream();
         try {
@@ -43,7 +42,8 @@ public class JsonReader {
             is.close();
         }
     }
-    public  ArrayList<ticker> getticker(String url){
+    public  ArrayList<ticker> getticker(){
+        String url ="https://api.kucoin.com/api/v1/market/allTickers";
         String json=null;
         try {
             json = readJsonFromUrl(url);
@@ -60,11 +60,12 @@ public class JsonReader {
         }
         return null;
     }
+    
 
     public static void main(String[] args) throws IOException {
-        String urlApi = "https://api.kucoin.com/api/v1/market/allTickers";
+       
        JsonReader js =new JsonReader();
-        ArrayList<ticker> list = js.getticker(urlApi);
+        ArrayList<ticker> list = js.getticker();
         for (int i=0;i<10;i++) {
             System.out.println(list.get(i).toString());
         }
