@@ -25,7 +25,7 @@ public class CreateAccount extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("view/createaccount.jsp");
+        request.getRequestDispatcher("view/createaccount.jsp").forward(request, response);
     }
 
 
