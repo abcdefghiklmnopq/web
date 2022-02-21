@@ -5,16 +5,6 @@
  */
 package model.kuCoin;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.JsonReader;
-import static model.JsonReader.readJsonFromUrl;
-import model.ticker;
 
 /**
  *
@@ -169,27 +159,8 @@ public class Tickerkucoin {
 
     @Override
     public String toString() {
-        return "ticker{" + "symbol=" + symbol + ", symbolName=" + symbolName + ", buy=" + buy + ", sell=" + sell + ", changeRate=" + changeRate + ", changePrice=" + changePrice + ", high=" + high + ", low=" + low + ", vol=" + vol + ", avgPrice=" + avgPrice + '}';
+        return "Tickerkucoin{" + "symbolName=" + symbolName + ", buy=" + buy + ", changeRate=" + changeRate + ", changePrice=" + changePrice + ", vol=" + vol + ", volValue=" + volValue + '}';
     }
 
-    public static ArrayList<ticker> getticker() {
-        String url = "https://api.kucoin.com/api/v1/market/allTickers";
-        String json = null;
-        try {
-            json = readJsonFromUrl(url);
-        } catch (IOException ex) {
-            Logger.getLogger(JsonReader.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (json != null) {
-            String[] splits = json.split("\"ticker\":");
-            String[] splits1 = splits[1].split("}}");
-            Gson gson = new Gson();
-            Type objtype = new TypeToken<ArrayList<Tickerkucoin>>() {
-            }.getType();
-            ArrayList<Tickerkucoin> lists = gson.fromJson(splits1[0], objtype);
-            ArrayList<ticker> liststicker = new ArrayList<>();
-            return liststicker;
-        }
-        return null;
-    }
+    
 }

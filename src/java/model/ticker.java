@@ -10,154 +10,63 @@ package model;
  * @author thand
  */
 public class ticker {
-        private String symbol;
-        private String symbolName;
-        private String buy;
-        private String sell;
-        private String changeRate;
-        private String changePrice;
-        private String high;
-        private String low;
-        private String vol;
-        private String volValue;
-        private String last;
-        private String avgPrice;
-        private String takerFeeRate;
-        private String makerFeeRate;
-        private String takerCoefficient;
-        private String makerCoefficient;
+    private String name; 
+    private String price;
+    private String changerate;
+    private String changeprice;
+    private String volume;
 
-    public String getSymbol() {
-        return symbol;
+    public ticker(String name, String price, String changerate, String changeprice, String volume) {
+        this.name = name;
+        this.price = price;
+        this.changerate = changerate;
+        this.changeprice = changeprice;
+        this.volume = volume;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+    public String getName() {
+        return name;
     }
 
-    public String getSymbolName() {
-        return symbolName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setSymbolName(String symbolName) {
-        this.symbolName = symbolName;
+    public String getPrice() {
+        return price;
     }
 
-    public String getBuy() {
-        return buy;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
-    public void setBuy(String buy) {
-        this.buy = buy;
+    public String getChangerate() {
+        return changerate;
     }
 
-    public String getSell() {
-        return sell;
+    public void setChangerate(String changerate) {
+        this.changerate = changerate;
     }
 
-    public void setSell(String sell) {
-        this.sell = sell;
+    public String getChangeprice() {
+        return changeprice;
     }
 
-    public String getChangeRate() {
-        return changeRate;
+    public void setChangeprice(String changeprice) {
+        this.changeprice = changeprice;
     }
 
-    public void setChangeRate(String changeRate) {
-        this.changeRate = changeRate;
+    public String getVolume() {
+        return volume;
     }
 
-    public String getChangePrice() {
-        return changePrice;
-    }
-
-    public void setChangePrice(String changePrice) {
-        this.changePrice = changePrice;
-    }
-
-    public String getHigh() {
-        return high;
-    }
-
-    public void setHigh(String high) {
-        this.high = high;
-    }
-
-    public String getLow() {
-        return low;
-    }
-
-    public void setLow(String low) {
-        this.low = low;
-    }
-
-    public String getVol() {
-        return vol;
-    }
-
-    public void setVol(String vol) {
-        this.vol = vol;
-    }
-
-    public String getVolValue() {
-        return volValue;
-    }
-
-    public void setVolValue(String volValue) {
-        this.volValue = volValue;
-    }
-
-    public String getLast() {
-        return last;
-    }
-
-    public void setLast(String last) {
-        this.last = last;
-    }
-
-    public String getAvgPrice() {
-        return avgPrice;
-    }
-
-    public void setAvgPrice(String avgPrice) {
-        this.avgPrice = avgPrice;
-    }
-
-    public String getTakerFeeRate() {
-        return takerFeeRate;
-    }
-
-    public void setTakerFeeRate(String takerFeeRate) {
-        this.takerFeeRate = takerFeeRate;
-    }
-
-    public String getMakerFeeRate() {
-        return makerFeeRate;
-    }
-
-    public void setMakerFeeRate(String makerFeeRate) {
-        this.makerFeeRate = makerFeeRate;
-    }
-
-    public String getTakerCoefficient() {
-        return takerCoefficient;
-    }
-
-    public void setTakerCoefficient(String takerCoefficient) {
-        this.takerCoefficient = takerCoefficient;
-    }
-
-    public String getMakerCoefficient() {
-        return makerCoefficient;
-    }
-
-    public void setMakerCoefficient(String makerCoefficient) {
-        this.makerCoefficient = makerCoefficient;
+    public void setVolume(String volume) {
+        this.volume = volume;
     }
 
     @Override
     public String toString() {
-        return "ticker{" + "symbol=" + symbol + ", symbolName=" + symbolName + ", buy=" + buy + ", sell=" + sell + ", changeRate=" + changeRate + ", changePrice=" + changePrice + ", high=" + high + ", low=" + low + ", vol=" + vol + ", avgPrice=" + avgPrice + '}';
+        return "ticker{" + "name=" + name + ", price=" + price + ", changerate=" + changerate + ", changeprice=" + changeprice + ", volume=" + volume + '}';
     }
 
     

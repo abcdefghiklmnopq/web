@@ -14,7 +14,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>home Page</title>
         <%
+            
             ArrayList<ticker> list = (ArrayList<ticker>) request.getAttribute("list");
+            String markettype = request.getParameter("markettype");
+            String cex = request.getParameter("cex");
         %>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -22,6 +25,9 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <style>
             .txt{
+                text-align: right;
+            }
+            .center{
                 text-align: center;
             }
             .form-container {
@@ -32,27 +38,41 @@
                 margin-bottom: 10px;
                 padding: 20px;
                 max-width: 500px;
-
             }
             div{
                 padding: 20px
             }
         </style>
+
     </head>
     <body>
+       
         <div class="select">
-            <form action="viewServlet" method="POST">
-            &emsp;&emsp;Market Type:&emsp;<select name="markettype">
-                <option value="1">Spot</option>
-                <option value="2">Futures</option>
-            </select>
-            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CEX:&emsp;<select name="cex">
-                <option value="1">kukoin</option>
-                <option value="2">binance</option>
-            </select><br>
-        </form>
+            <form action="viewServlet" method="POST" >
+                &emsp;&emsp;Market Type:&emsp;
+                <select name="markettype">
+
+                    <option value="Spot" >Spot</option>
+                    <option value="Futures" 
+                            <%if (cex != null && markettype.equals("Futures")) {%>
+                            selected="selected" 
+                            <%}%>
+                            >Futures</option>
+                </select>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CEX:&emsp;
+                <select name="cex">
+                    <option value="Binance">Binance</option>
+                    <option value="kukoin" 
+                            <%if (cex != null && cex.equals("kukoin")) {%>
+                            selected="selected" 
+                            <%}%>
+                            >kukoin</option>
+                </select><br>
+                <br>
+                &emsp;&emsp;<input type="submit"  value="submit"/>
+            </form>
         </div>
-        
+        <%if (list.size() != 0) {%>
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <table border="1">
@@ -62,17 +82,20 @@
                             <th>&emsp; Price &emsp;</th>
                             <th>&ensp;(24h)ChangeRate &ensp;</th>
                             <th>&emsp; ChangePrice &emsp;</th>
-                            <th>&emsp; Volume&emsp; </th>
+                            <th>&emsp; Volume(USDT)&emsp; </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <%for (int i = 0; i < 10; i++) {%>
+                        <%for (ticker t : list)
+                                
+                            
+ {%>
                         <tr>
-                            <td><%=list.get(i).getSymbolName()%></td>
-                            <td class="txt"> <%=list.get(i).getBuy()%></td>
-                            <td class="txt"><%=list.get(i).getChangeRate()%></td>
-                            <td class="txt"> <%=list.get(i).getChangePrice()%></td>
-                            <td class="txt"><%=list.get(i).getVol()%></td>
+                            <td><%=t.getName()%></td>
+                            <td > &emsp;<%=t.getPrice()%>&emsp;</td>
+                            <td class="center"><%=t.getChangerate()%>&emsp;%</td>
+                            <td class="txt"> <%=t.getChangeprice()%>&emsp;</td>
+                            <td class="txt"><%=t.getVolume()%>&emsp;M&emsp;</td>
                         </tr>
                         <%}%>
                     </tbody>
@@ -89,13 +112,13 @@
                         Confguration<br>
                         Lever 1:<br>
                         <input type="text" placeholder="% Change Rate" name="changerate">(%) Change Rate<br>
-                        <input type="text" placeholder=" Volume24h" name="vol">(USD) Volume 24h <br/>
+                        <input type="text" placeholder=" Volume24h" name="vol">M&emsp;(USD) Volume 24h <br/>
                         <input type="submit"  value="Filter"/>
                     </form>
                     <form action="viewServlet" method="POST">
                         Lever 2:<br>
                         <input type="text" placeholder="% Change Rate" name="changerate">(%) Change Rate<br>
-                        <input type="text" placeholder=" Volume24h" name="vol">(USD) Volume 24h <br>
+                        <input type="text" placeholder=" Volume24h" name="vol">M&emsp;(USD) Volume 24h <br>
                         Elasted Time: 
                         <select name="elastedtime">
                             <option value="1">1h</option>
@@ -109,9 +132,8 @@
                         <input type="submit"  value="End"/>
                     </form>
                 </div>
-
             </div>
         </div>
-
+        <%}%>
     </body>
 </html>
