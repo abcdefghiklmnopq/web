@@ -8,10 +8,10 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.CEX;
 import model.JsonReader;
 import model.ticker;
 
@@ -25,79 +25,110 @@ public class viewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ArrayList<ticker> list = JsonReader.getliststickerBinanceSpot();
-        request.setAttribute("list", list);
+//        request.setAttribute("list", list);
+        CEX cexs = new CEX(1, "Binance.Spot");
+        request.getSession().setAttribute("cexs", cexs);
+        request.getSession().setAttribute("list", list);
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String markettype = request.getParameter("markettype");
-        String cex = request.getParameter("cex");
-        ArrayList<ticker> list = JsonReader.getliststickerBinanceSpot();
-        if (markettype != null) {
+        String markettype = request.getParameter("markettype") + "";
+        String cex = request.getParameter("cex") + "";
+        ArrayList<ticker> list = new ArrayList<>();
+        if (markettype.trim().isEmpty()) {
+            list = (ArrayList<ticker>) request.getSession().getAttribute("list");
+        } else {
             switch (cex) {
                 case "Binance":
                     if (markettype.equals("Spot")) {
                         list.removeAll(list);
                         list = JsonReader.getliststickerBinanceSpot();
+                        request.getSession().setAttribute("list", list);
+                        CEX cexs = new CEX(1, "Binance.Spot");
+                        request.getSession().setAttribute("cexs", cexs);
                     } else if (markettype.equals("Futures")) {
                         list.removeAll(list);
                         list = JsonReader.getliststickerBinanceFutures();
+                        request.getSession().setAttribute("list", list);
+                        CEX cexs = new CEX(1, "Binance.Futures");
+                        request.getSession().setAttribute("cexs", cexs);
                     }
                     break;
                 case "kukoin":
                     if (markettype.equals("Spot")) {
                         list.removeAll(list);
                         list = JsonReader.gettickerkucoinSpot();
+                        request.getSession().setAttribute("list", list);
+                        CEX cexs = new CEX(1, "kukoin.Spot");
+                        request.getSession().setAttribute("cexs", cexs);
                     } else if (markettype.equals("Futures")) {
                         list = JsonReader.gettickerkucoinFuteres();
+                        request.getSession().setAttribute("list", list);
+                        CEX cexs = new CEX(1, "kukoin.Futures");
+                        request.getSession().setAttribute("cexs", cexs);
                     }
             }
-            request.setAttribute("markettype", list);
-            request.setAttribute("cex", list);
         }
+        list = fitle(request, response, list);
+        request.setAttribute("list", list);
+        request.getRequestDispatcher("view/home.jsp").forward(request, response);
+
+    }
+
+    public ArrayList<ticker> fitle(HttpServletRequest request, HttpServletResponse response,
+            ArrayList<ticker> list) throws IOException {
         ArrayList<ticker> listlv1 = new ArrayList<>();
-        String crate = request.getParameter("changerate");
-        double changerate=-100;
-//        if (!crate.isEmpty()) {
-//            changerate = Double.parseDouble(crate);
-//            request.setAttribute("changerate", changerate);
-//        }
-//        String volume = request.getParameter("vol");
-//        double vol=0;
-//        if (!volume.isEmpty()) {
-//            vol = Double.parseDouble(volume);
-//            request.setAttribute("vol", vol);
-//        }
-//        if (!crate.isEmpty() && volume.isEmpty()) {
+
+        String crate = request.getParameter("changerate") + "";
+        double changerate = -100.0;
+        if (!crate.isEmpty()) {
+            try {
+                changerate = Double.parseDouble(crate);
+                response.getWriter().println(changerate);
+            } catch (Exception e) {
+            }
+            request.setAttribute("changerate", String.valueOf(changerate));
+        }
+        String volume = request.getParameter("vol") + "";
+        double vol = 0;
+        if (!volume.isEmpty()) {
+            try {
+                vol = Double.parseDouble(volume.trim());
+                response.getWriter().println(vol);
+            } catch (Exception e) {
+            }
+
+            request.setAttribute("vol", vol);
+        }
+        if (!crate.isEmpty() && volume.isEmpty()) {
+            for (ticker t : list) {
+                if (Double.parseDouble(t.getChangerate()) > changerate) {
+                    listlv1.add(t);
+                }
+            }
+        }
+//        if (crate.isEmpty() && !volume.isEmpty()) {
 //            for (ticker t : list) {
-//                if(Double.parseDouble(t.getChangerate())>changerate){
-//                    listlv1.add(t);
-//                }
-//            }
-//        }
-//        if (crate.isEmpty() && !volume.isEmpty() ) {
-//            for (ticker t : list) {
-//                if(Double.parseDouble(t.getVolume())>vol){
+//                if (Double.parseDouble(t.getVolume()) > vol) {
 //                    listlv1.add(t);
 //                }
 //            }
 //        }
 //        if (!crate.isEmpty() && !volume.isEmpty()) {
 //            for (ticker t : list) {
-//                if(Double.parseDouble(t.getVolume())>vol && Double.parseDouble(t.getChangerate())>changerate ){
+//                if (Double.parseDouble(t.getVolume()) > vol && Double.parseDouble(t.getChangerate()) > changerate) {
 //                    listlv1.add(t);
 //                }
 //            }
 //        }
         if (listlv1.isEmpty()) {
-            request.setAttribute("list", list);
+            return list;
         } else {
-            request.setAttribute("list", listlv1);
+            return listlv1;
         }
-
-        request.getRequestDispatcher("view/home.jsp").forward(request, response);
 
     }
 

@@ -4,6 +4,7 @@
     Author     : thand
 --%>
 
+<%@page import="model.CEX"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.ticker"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,9 +16,11 @@
         <title>home Page</title>
         <%
             
-            ArrayList<ticker> list = (ArrayList<ticker>) request.getAttribute("list");
-            String markettype = request.getParameter("markettype");
-            String cex = request.getParameter("cex");
+            ArrayList<ticker> list = (ArrayList<ticker>) request.getSession().getAttribute("list");
+            CEX x = (CEX) request.getSession().getAttribute("cexs");
+            String[] y= x.getCexname().split(".");
+            String markettype = y[1];
+            String cex = y[0];
         %>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -43,12 +46,18 @@
                 padding: 20px
             }
         </style>
+        <script>
+            function submitData()
+            {
+                document.getElementById("cex").submit();
+            }
+        </script>
 
     </head>
     <body>
        
         <div class="select">
-            <form action="viewServlet" method="POST" >
+            <form action="viewServlet" method="POST" id="cex" >
                 &emsp;&emsp;Market Type:&emsp;
                 <select name="markettype">
 
@@ -69,7 +78,7 @@
                             >kukoin</option>
                 </select><br>
                 <br>
-                &emsp;&emsp;<input type="submit"  value="submit"/>
+                &emsp;&emsp;<input type="submit"  value="submit" onclick="submitData();"/>
             </form>
         </div>
         <%if (list.size() != 0) {%>
@@ -103,7 +112,7 @@
             </div>
             <div class="col-md-6 col-sm-12" >
                 <div class="form-container">
-                    <form action="viewServlet" method="POST">
+                    <form action="viewServlet" method="POST" id="searchFrm">
                         Alert:<br>
                         <input type="email" placeholder="Email address" name="email"><br>
                         Do you want to receive emails: <input type="radio" name="sendeail" value="yes"> YES 
@@ -113,9 +122,9 @@
                         Lever 1:<br>
                         <input type="text" placeholder="% Change Rate" name="changerate">(%) Change Rate<br>
                         <input type="text" placeholder=" Volume24h" name="vol">M&emsp;(USD) Volume 24h <br/>
-                        <input type="submit"  value="Filter"/>
+                        <input type="submit"  value="Filter" onclick="submitData();" />
                     </form>
-                    <form action="viewServlet" method="POST">
+                    <form action="viewServlet" method="POST" >
                         Lever 2:<br>
                         <input type="text" placeholder="% Change Rate" name="changerate">(%) Change Rate<br>
                         <input type="text" placeholder=" Volume24h" name="vol">M&emsp;(USD) Volume 24h <br>
@@ -128,8 +137,8 @@
                             <option value="12">12h</option>
                             <option value="24">24h</option>
                         </select><br>
-                        <input type="submit"  value="Start"/>
-                        <input type="submit"  value="End"/>
+                        <input type="submit"  value="Start" onclick="submitData();"/>
+                        <input type="submit"  value="End" onclick="submitData();"/>
                     </form>
                 </div>
             </div>
