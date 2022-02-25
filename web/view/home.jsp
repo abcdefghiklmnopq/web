@@ -16,9 +16,9 @@
         <title>home Page</title>
         <%
             
-            ArrayList<ticker> list = (ArrayList<ticker>) request.getSession().getAttribute("list");
+            ArrayList<ticker> list = (ArrayList<ticker>) request.getAttribute("list");
             CEX x = (CEX) request.getSession().getAttribute("cexs");
-            String[] y= x.getCexname().split(".");
+            String[] y= x.getCexname().split("\\.");
             String markettype = y[1];
             String cex = y[0];
         %>
@@ -46,18 +46,13 @@
                 padding: 20px
             }
         </style>
-        <script>
-            function submitData()
-            {
-                document.getElementById("cex").submit();
-            }
-        </script>
+
 
     </head>
     <body>
        
         <div class="select">
-            <form action="viewServlet" method="POST" id="cex" >
+            <form action="viewServlet" method="POST" >
                 &emsp;&emsp;Market Type:&emsp;
                 <select name="markettype">
 
@@ -78,7 +73,7 @@
                             >kukoin</option>
                 </select><br>
                 <br>
-                &emsp;&emsp;<input type="submit"  value="submit" onclick="submitData();"/>
+                &emsp;&emsp;<input type="submit"  value="submit" />
             </form>
         </div>
         <%if (list.size() != 0) {%>
@@ -112,7 +107,7 @@
             </div>
             <div class="col-md-6 col-sm-12" >
                 <div class="form-container">
-                    <form action="viewServlet" method="POST" id="searchFrm">
+                    <form action="viewServlet" method="POST" >
                         Alert:<br>
                         <input type="email" placeholder="Email address" name="email"><br>
                         Do you want to receive emails: <input type="radio" name="sendeail" value="yes"> YES 
@@ -122,7 +117,7 @@
                         Lever 1:<br>
                         <input type="text" placeholder="% Change Rate" name="changerate">(%) Change Rate<br>
                         <input type="text" placeholder=" Volume24h" name="vol">M&emsp;(USD) Volume 24h <br/>
-                        <input type="submit"  value="Filter" onclick="submitData();" />
+                        <input type="submit"  value="Filter"  />
                     </form>
                     <form action="viewServlet" method="POST" >
                         Lever 2:<br>

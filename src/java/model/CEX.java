@@ -13,6 +13,9 @@ public class CEX {
     private int cexid;
     private String cexname;
 
+    public CEX() {
+    }
+
     public CEX(int cexid, String cexname) {
         this.cexid = cexid;
         this.cexname = cexname;

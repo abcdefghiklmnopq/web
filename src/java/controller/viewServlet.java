@@ -25,10 +25,11 @@ public class viewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ArrayList<ticker> list = JsonReader.getliststickerBinanceSpot();
-//        request.setAttribute("list", list);
+
         CEX cexs = new CEX(1, "Binance.Spot");
         request.getSession().setAttribute("cexs", cexs);
         request.getSession().setAttribute("list", list);
+        request.setAttribute("list", list);
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
 
@@ -37,23 +38,21 @@ public class viewServlet extends HttpServlet {
             throws ServletException, IOException {
         String markettype = request.getParameter("markettype") + "";
         String cex = request.getParameter("cex") + "";
-        ArrayList<ticker> list = new ArrayList<>();
-        if (markettype.trim().isEmpty()) {
-            list = (ArrayList<ticker>) request.getSession().getAttribute("list");
-        } else {
+        ArrayList<ticker> list = (ArrayList<ticker>) request.getSession().getAttribute("list");
+        if (!markettype.trim().isEmpty()) {
             switch (cex) {
                 case "Binance":
                     if (markettype.equals("Spot")) {
                         list.removeAll(list);
                         list = JsonReader.getliststickerBinanceSpot();
                         request.getSession().setAttribute("list", list);
-                        CEX cexs = new CEX(1, "Binance.Spot");
+                        CEX cexs = new CEX(1, cex+"."+markettype);
                         request.getSession().setAttribute("cexs", cexs);
                     } else if (markettype.equals("Futures")) {
                         list.removeAll(list);
                         list = JsonReader.getliststickerBinanceFutures();
                         request.getSession().setAttribute("list", list);
-                        CEX cexs = new CEX(1, "Binance.Futures");
+                        CEX cexs = new CEX(1, cex+"."+markettype);
                         request.getSession().setAttribute("cexs", cexs);
                     }
                     break;
@@ -62,20 +61,20 @@ public class viewServlet extends HttpServlet {
                         list.removeAll(list);
                         list = JsonReader.gettickerkucoinSpot();
                         request.getSession().setAttribute("list", list);
-                        CEX cexs = new CEX(1, "kukoin.Spot");
+                        CEX cexs = new CEX(1, cex+"."+markettype);
                         request.getSession().setAttribute("cexs", cexs);
                     } else if (markettype.equals("Futures")) {
                         list = JsonReader.gettickerkucoinFuteres();
                         request.getSession().setAttribute("list", list);
-                        CEX cexs = new CEX(1, "kukoin.Futures");
+                        CEX cexs = new CEX(1, cex+"."+markettype);
                         request.getSession().setAttribute("cexs", cexs);
                     }
             }
         }
+        
         list = fitle(request, response, list);
         request.setAttribute("list", list);
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
-
     }
 
     public ArrayList<ticker> fitle(HttpServletRequest request, HttpServletResponse response,
@@ -87,21 +86,17 @@ public class viewServlet extends HttpServlet {
         if (!crate.isEmpty()) {
             try {
                 changerate = Double.parseDouble(crate);
-                response.getWriter().println(changerate);
             } catch (Exception e) {
             }
-            request.setAttribute("changerate", String.valueOf(changerate));
         }
         String volume = request.getParameter("vol") + "";
         double vol = 0;
         if (!volume.isEmpty()) {
             try {
                 vol = Double.parseDouble(volume.trim());
-                response.getWriter().println(vol);
             } catch (Exception e) {
             }
 
-            request.setAttribute("vol", vol);
         }
         if (!crate.isEmpty() && volume.isEmpty()) {
             for (ticker t : list) {
@@ -110,20 +105,20 @@ public class viewServlet extends HttpServlet {
                 }
             }
         }
-//        if (crate.isEmpty() && !volume.isEmpty()) {
-//            for (ticker t : list) {
-//                if (Double.parseDouble(t.getVolume()) > vol) {
-//                    listlv1.add(t);
-//                }
-//            }
-//        }
-//        if (!crate.isEmpty() && !volume.isEmpty()) {
-//            for (ticker t : list) {
-//                if (Double.parseDouble(t.getVolume()) > vol && Double.parseDouble(t.getChangerate()) > changerate) {
-//                    listlv1.add(t);
-//                }
-//            }
-//        }
+        if (crate.isEmpty() && !volume.isEmpty()) {
+            for (ticker t : list) {
+                if (Double.parseDouble(t.getVolume()) > vol) {
+                    listlv1.add(t);
+                }
+            }
+        }
+        if (!crate.isEmpty() && !volume.isEmpty()) {
+            for (ticker t : list) {
+                if (Double.parseDouble(t.getVolume()) > vol && Double.parseDouble(t.getChangerate()) > changerate) {
+                    listlv1.add(t);
+                }
+            }
+        }
         if (listlv1.isEmpty()) {
             return list;
         } else {
@@ -131,6 +126,8 @@ public class viewServlet extends HttpServlet {
         }
 
     }
+    
+    
 
     @Override
     public String getServletInfo() {

@@ -88,8 +88,7 @@ public class JsonReader {
             String[] splits = json.split("\"ticker\":");
             String[] splits1 = splits[1].split("}}");
             Gson gson = new Gson();
-            Type objtype = new TypeToken<ArrayList<Tickerkucoin>>() {
-            }.getType();
+            Type objtype = new TypeToken<ArrayList<Tickerkucoin>>() {}.getType();
             ArrayList<Tickerkucoin> lists = gson.fromJson(splits1[0], objtype);
             liststickerKuCoin.removeAll(liststickerKuCoin);
             for (Tickerkucoin t : lists) {
