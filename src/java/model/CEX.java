@@ -10,23 +10,34 @@ package model;
  * @author thand
  */
 public class CEX {
-    private int cexid;
+    private int makettypeid;
+    private String name;
     private String cexname;
 
     public CEX() {
     }
 
-    public CEX(int cexid, String cexname) {
-        this.cexid = cexid;
+    public CEX(int makettypeid,  String cexname ,String name) {
+        this.makettypeid = makettypeid;
+        this.name = name;
         this.cexname = cexname;
     }
 
-    public int getCexid() {
-        return cexid;
+    
+    public int getMakettypeid() {
+        return makettypeid;
     }
 
-    public void setCexid(int cexid) {
-        this.cexid = cexid;
+    public void setMakettypeid(int makettypeid) {
+        this.makettypeid = makettypeid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCexname() {
@@ -36,6 +47,8 @@ public class CEX {
     public void setCexname(String cexname) {
         this.cexname = cexname;
     }
+
+    
     
     
 }
