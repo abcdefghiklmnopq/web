@@ -18,9 +18,8 @@
             
             ArrayList<ticker> list = (ArrayList<ticker>) request.getAttribute("list");
             CEX x = (CEX) request.getSession().getAttribute("cexs");
-            String[] y= x.getCexname().split("\\.");
-            String markettype = y[1];
-            String cex = y[0];
+            String markettype = x.getName();
+            String cex = x.getCexname();
         %>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -46,19 +45,19 @@
                 padding: 20px
             }
         </style>
-
+        
 
     </head>
     <body>
        
         <div class="select">
-            <form action="viewServlet" method="POST" >
+            <form action="viewServlet" method="POST" id="searchFrm" >
                 &emsp;&emsp;Market Type:&emsp;
                 <select name="markettype">
 
                     <option value="Spot" >Spot</option>
                     <option value="Futures" 
-                            <%if (cex != null && markettype.equals("Futures")) {%>
+                            <%if ( markettype.equals("Futures")) {%>
                             selected="selected" 
                             <%}%>
                             >Futures</option>
@@ -67,7 +66,7 @@
                 <select name="cex">
                     <option value="Binance">Binance</option>
                     <option value="kukoin" 
-                            <%if (cex != null && cex.equals("kukoin")) {%>
+                            <%if ( cex.equals("kukoin")) {%>
                             selected="selected" 
                             <%}%>
                             >kukoin</option>
@@ -115,14 +114,14 @@
                         <br>
                         Confguration<br>
                         Lever 1:<br>
-                        <input type="text" placeholder="% Change Rate" name="changerate">(%) Change Rate<br>
-                        <input type="text" placeholder=" Volume24h" name="vol">M&emsp;(USD) Volume 24h <br/>
+                        <input type="text" placeholder="% Change Rate" name="changerate1">(%) Change Rate<br>
+                        <input type="text" placeholder=" Volume24h" name="vol1">M&emsp;(USD) Volume 24h <br/>
                         <input type="submit"  value="Filter"  />
                     </form>
-                    <form action="viewServlet" method="POST" >
+                    <form action="list" method="POST" >
                         Lever 2:<br>
-                        <input type="text" placeholder="% Change Rate" name="changerate">(%) Change Rate<br>
-                        <input type="text" placeholder=" Volume24h" name="vol">M&emsp;(USD) Volume 24h <br>
+                        <input type="text" placeholder="% Change Rate" name="changerate2">(%) Change Rate<br>
+                        <input type="text" placeholder=" Volume24h" name="vol2">M&emsp;(USD) Volume 24h <br>
                         Elasted Time: 
                         <select name="elastedtime">
                             <option value="1">1h</option>
