@@ -25,8 +25,7 @@ public class viewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ArrayList<ticker> list = JsonReader.getliststickerBinanceSpot();
-
-        CEX cexs = new CEX(1, "Binance.Spot");
+        CEX cexs = new CEX(1, "Binance","Spot");
         request.getSession().setAttribute("cexs", cexs);
         request.getSession().setAttribute("list", list);
         request.setAttribute("list", list);
@@ -40,19 +39,19 @@ public class viewServlet extends HttpServlet {
         String cex = request.getParameter("cex") + "";
         ArrayList<ticker> list = (ArrayList<ticker>) request.getSession().getAttribute("list");
         if (!markettype.trim().isEmpty()) {
+//            CEX cexs = new CEX(1, cex , markettype);
+//            request.getSession().setAttribute("cexs", cexs);
             switch (cex) {
                 case "Binance":
                     if (markettype.equals("Spot")) {
                         list.removeAll(list);
                         list = JsonReader.getliststickerBinanceSpot();
-                        request.getSession().setAttribute("list", list);
-                        CEX cexs = new CEX(1, cex+"."+markettype);
+                        CEX cexs = new CEX(1, cex , markettype);
                         request.getSession().setAttribute("cexs", cexs);
                     } else if (markettype.equals("Futures")) {
                         list.removeAll(list);
                         list = JsonReader.getliststickerBinanceFutures();
-                        request.getSession().setAttribute("list", list);
-                        CEX cexs = new CEX(1, cex+"."+markettype);
+                        CEX cexs = new CEX(1, cex , markettype);
                         request.getSession().setAttribute("cexs", cexs);
                     }
                     break;
@@ -60,28 +59,27 @@ public class viewServlet extends HttpServlet {
                     if (markettype.equals("Spot")) {
                         list.removeAll(list);
                         list = JsonReader.gettickerkucoinSpot();
-                        request.getSession().setAttribute("list", list);
-                        CEX cexs = new CEX(1, cex+"."+markettype);
+                        CEX cexs = new CEX(1, cex , markettype);
                         request.getSession().setAttribute("cexs", cexs);
                     } else if (markettype.equals("Futures")) {
                         list = JsonReader.gettickerkucoinFuteres();
-                        request.getSession().setAttribute("list", list);
-                        CEX cexs = new CEX(1, cex+"."+markettype);
+                        CEX cexs = new CEX(1, cex , markettype);
                         request.getSession().setAttribute("cexs", cexs);
                     }
             }
+            request.getSession().setAttribute("list", list);
         }
         
-        list = fitle(request, response, list);
+        String crate = request.getParameter("changerate1") + "";
+        String volume = request.getParameter("vol1") + "";
+        list = fitle(request, response, list, crate, volume);
         request.setAttribute("list", list);
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
 
     public ArrayList<ticker> fitle(HttpServletRequest request, HttpServletResponse response,
-            ArrayList<ticker> list) throws IOException {
+            ArrayList<ticker> list, String crate,String volume) throws IOException {
         ArrayList<ticker> listlv1 = new ArrayList<>();
-
-        String crate = request.getParameter("changerate") + "";
         double changerate = -100.0;
         if (!crate.isEmpty()) {
             try {
@@ -89,7 +87,7 @@ public class viewServlet extends HttpServlet {
             } catch (Exception e) {
             }
         }
-        String volume = request.getParameter("vol") + "";
+        
         double vol = 0;
         if (!volume.isEmpty()) {
             try {
