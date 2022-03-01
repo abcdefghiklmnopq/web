@@ -158,6 +158,19 @@ public class JsonReader {
         }
         return null;
     }
+    public static String getlist(){
+        String url = "https://api.binance.com/api/v3/ticker/24hr";
+        String json = null;
+        ArrayList<ticker> liststickerBinanceSpot = new ArrayList<>();
+        try {
+            json = readJsonFromUrl(url);
+        } catch (IOException ex) {
+            Logger.getLogger(JsonReader.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return json;
+        
+    }
 
     public static void main(String[] args) throws IOException {
 
