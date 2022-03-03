@@ -149,23 +149,15 @@
                                    value="<%=volumelv2%>"
                                    <%}%>
                                    >M&emsp;(USD) Volume 24h <br>
-                            &ensp;<select name="elastedtime" id="elastedtime"
-                                           onchange="change()">
-                                <option hidden="" value="<%=elastedtime %>"></option>
-                                <option value="1" >1h</option>
-                                <option value="2">2h</option>
-                                <option value="5">5h</option>
-                                <option value="10">10h</option>
-                                <option value="12">12h</option>
-                                <option value="24">24h</option>
+                            &ensp;<select name="elastedtime" id="elastedtime" onchange="change()">
+                                <option value="1" <%=elastedtime.equals("1")?"selected=\"selected\"":"" %>>1h</option>
+                                <option value="2" <%=elastedtime.equals("2")?"selected=\"selected\"":"" %>>2h</option>
+                                <option value="5" <%=elastedtime.equals("5")?"selected=\"selected\"":"" %>>5h</option>
+                                <option value="10" <%=elastedtime.equals("10")?"selected=\"selected\"":"" %>>10h</option>
+                                <option value="12" <%=elastedtime.equals("12")?"selected=\"selected\"":"" %>>12h</option>
+                                <option value="24" <%=elastedtime.equals("24")?"selected=\"selected\"":"" %>>24h</option>
                             </select> &emsp;Elasted Time <br>
-                            <%if(elastedtime ==null || elastedtime.trim().length()==0){}else{%>
-                                    <span > <%=elastedtime %> h   
-                                    </span><br>
-                                    <%}%>
-                            
                             <input type="text"  value="0" id="number" /> so phut troi qua!
-
                             <input type="submit"  value="Start" onclick="Stat();"/>
                             <input type="button"  value="End" onclick="Stop();"/>
                         </form>
