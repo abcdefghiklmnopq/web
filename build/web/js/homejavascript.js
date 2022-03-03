@@ -4,6 +4,24 @@
  * and open the template in the editor.
  */
 
+var getvalue = function getvalue(){
+        
+        var number = document.getElementById("number").value;
+        number++;
+        document.getElementById("number").value = number;
+        if(number === 20){
+            document.getElementById("searchFrm").submit();
+            number=0;
+        }
+}
+
+var clear;
 function Stat(){
-   document.getElementById("searchFrm").submit();
+    clear= setInterval(getvalue,1000);
+   
+}
+function Stop(){
+    
+    clearInterval(clear);
+    document.getElementById("number").value=0;
 }

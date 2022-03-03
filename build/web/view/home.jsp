@@ -140,6 +140,7 @@
                                 <option value="12">12h</option>
                                 <option value="24">24h</option>
                             </select> &emsp;Elasted Time <br>
+                            <input type="text"  value="0" id="number" /> so phut troi qua!
                             <input type="button"  value="Start" onclick="Stat();"/>
                             <input type="button"  value="End" onclick="Stop();"/>
                         </form>
@@ -149,6 +150,15 @@
         </div>
         <%}%>
         
-       <script src="js/homejavascript.js" type="text/javascript"></script>
+        <script src="js/homejavascript.js" type="text/javascript"></script>
+        <script>
+             <%
+               String a= (String) request.getParameter("continue");
+               if(!a.isEmpty()){
+               
+               }
+           %>
+               Stat();
+        </script>
     </body>
 </html>
