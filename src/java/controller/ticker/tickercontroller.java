@@ -33,6 +33,7 @@ public class tickercontroller extends HttpServlet {
         volume = (String) request.getSession().getAttribute("volume")+"";
         list = viewServlet.fitle(request, response, list, crate, volume);
         request.setAttribute("list", list);
+        request.setAttribute("a", "a");
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
 

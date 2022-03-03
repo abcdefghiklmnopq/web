@@ -21,7 +21,6 @@ function Stat(){
    
 }
 function Stop(){
-    
     clearInterval(clear);
     document.getElementById("number").value=0;
 }
