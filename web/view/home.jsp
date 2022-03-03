@@ -146,10 +146,8 @@
                                    <%
                                        String a= (String) request.getAttribute("a");
                                        if(a.equals("a")){%>
-                                       onload="Stat();"
+                                       onload="Stat()"
                                    <%}%>
-                                   
-                                   
                                    />
                             <input type="button"  value="End" onclick="Stop();"/>
                         </form>
