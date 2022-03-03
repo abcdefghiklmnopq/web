@@ -20,7 +20,7 @@
             CEX x = (CEX) request.getSession().getAttribute("cexs");
             String markettype = x.getName();
             String cex = x.getCexname();
-            String cratelv2 = (String) request.getSession().getAttribute("crate")+"";
+            String cratelv2 = (String) request.getSession().getAttribute("crate");
             String volumelv2 = (String) request.getSession().getAttribute("volume")+"";
         %>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -138,11 +138,11 @@
                         <form action="list" method="POST" id="searchFrm"  >
                             Lever 2:<br>
                             <input type="text" placeholder="% Change Rate" name="changerate2"
-                                   <% if(cratelv2!=null &&!cratelv2.trim().isEmpty()){%> value="<%=cratelv2%>"
+                                   <% if( cratelv2!=null || !cratelv2.trim().isEmpty()){%> value="<%=cratelv2%>"
                                    <%}%>
                                    >(%) Change Rate<br>
                             <input type="text" placeholder=" Volume24h" name="vol2"
-                                   <% if(volumelv2!=null||!volumelv2.trim().isEmpty()){%> value="<%=volumelv2%>"
+                                   <% if(volumelv2!=null || !volumelv2.trim().isEmpty()){%> value="<%=volumelv2%>"
                                    <%}%>
                                    >M&emsp;(USD) Volume 24h <br>
                             &ensp;<select name="elastedtime" id="elastedtime">
