@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var hour = document.getElementById("elastedtime").value;
 
 var getvalue = function getvalue(){
 
