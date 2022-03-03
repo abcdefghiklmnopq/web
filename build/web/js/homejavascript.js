@@ -4,18 +4,6 @@
  * and open the template in the editor.
  */
 
-var getvalue = function getvalue(){
-        document.getElementById("searchFrm").submit();
- 
-}
-var clear;
 function Stat(){
-   setInterval(getvalue,100);
+   document.getElementById("searchFrm").submit();
 }
-function Stop(){
-    
-    clearInterval(clear);
-    document.getElementById("time").value =0;
-}
-
-

@@ -61,7 +61,7 @@
     <body>
 
         <div class="select">
-            <form action="viewServlet" method="POST" id="searchFrm" >
+            <form action="viewServlet" method="POST" >
                 &emsp;&emsp;Market Type:&emsp;
                 <select name="markettype">
 
@@ -140,15 +140,15 @@
                                 <option value="12">12h</option>
                                 <option value="24">24h</option>
                             </select> &emsp;Elasted Time <br>
-                            <input type="text" value="0" id="time" >&emsp; Minute<br>
                             <input type="button"  value="Start" onclick="Stat();"/>
-                            <input type="button"  value="End" onclick=""/>
+                            <input type="button"  value="End" onclick="Stop();"/>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
         <%}%>
-        <script src="js/homejavascript.js" type="text/javascript"></script>
+        
+       <script src="js/homejavascript.js" type="text/javascript"></script>
     </body>
 </html>
