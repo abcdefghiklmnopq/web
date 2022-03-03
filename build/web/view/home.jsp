@@ -151,14 +151,5 @@
         <%}%>
         
         <script src="js/homejavascript.js" type="text/javascript"></script>
-        <script>
-             <%
-               String a= (String) request.getParameter("continue");
-               if(!a.isEmpty()){
-               
-               }
-           %>
-               Stat();
-        </script>
     </body>
 </html>
