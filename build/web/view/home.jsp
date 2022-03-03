@@ -20,6 +20,8 @@
             CEX x = (CEX) request.getSession().getAttribute("cexs");
             String markettype = x.getName();
             String cex = x.getCexname();
+            String cratelv2 = (String) request.getSession().getAttribute("crate")+"";
+            String volumelv2 = (String) request.getSession().getAttribute("volume")+"";
         %>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -58,7 +60,12 @@
 
 
     </head>
-    <body>
+    <body <%
+        String a = (String) request.getAttribute("a")+"";
+        if (a.equals("a")) {%>
+        onload="Stat()"
+        <%}%>
+        >
 
         <div class="select">
             <form action="viewServlet" method="POST" >
@@ -130,8 +137,14 @@
                     <div class="form" >
                         <form action="list" method="POST" id="searchFrm"  >
                             Lever 2:<br>
-                            <input type="text" placeholder="% Change Rate" name="changerate2">(%) Change Rate<br>
-                            <input type="text" placeholder=" Volume24h" name="vol2">M&emsp;(USD) Volume 24h <br>
+                            <input type="text" placeholder="% Change Rate" name="changerate2"
+                                   <% if(cratelv2!=null &&!cratelv2.trim().isEmpty()){%> value="<%=cratelv2%>"
+                                   <%}%>
+                                   >(%) Change Rate<br>
+                            <input type="text" placeholder=" Volume24h" name="vol2"
+                                   <% if(volumelv2!=null||!volumelv2.trim().isEmpty()){%> value="<%=volumelv2%>"
+                                   <%}%>
+                                   >M&emsp;(USD) Volume 24h <br>
                             &ensp;<select name="elastedtime" id="elastedtime">
                                 <option value="1">1h</option>
                                 <option value="2">2h</option>
@@ -141,14 +154,8 @@
                                 <option value="24">24h</option>
                             </select> &emsp;Elasted Time <br>
                             <input type="text"  value="0" id="number" /> so phut troi qua!
-                            
-                            <input type="button"  value="Start" onclick="Stat();"
-                                   <%
-                                       String a= (String) request.getAttribute("a");
-                                       if(a.equals("a")){%>
-                                       onload="Stat()"
-                                   <%}%>
-                                   />
+
+                            <input type="submit"  value="Start" onclick="Stat();"/>
                             <input type="button"  value="End" onclick="Stop();"/>
                         </form>
                     </div>
@@ -156,7 +163,7 @@
             </div>
         </div>
         <%}%>
-        
-        <script src="js/homejavascript.js" type="text/javascript">Stat();</script>
+
+        <script src="js/homejavascript.js" type="text/javascript"></script>
     </body>
 </html>

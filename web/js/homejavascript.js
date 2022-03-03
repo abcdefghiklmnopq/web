@@ -5,7 +5,7 @@
  */
 
 var getvalue = function getvalue(){
-        
+
         var number = document.getElementById("number").value;
         number++;
         document.getElementById("number").value = number;
@@ -17,6 +17,7 @@ var getvalue = function getvalue(){
 
 var clear;
 function Stat(){
+    
     clear= setInterval(getvalue,1000);
    
 }
