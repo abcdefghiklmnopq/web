@@ -7,6 +7,8 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +17,7 @@ import model.CEX;
 import model.JsonReader;
 import model.ticker;
 
-/**
- *
- * @author thand
- */
+
 public class viewServlet extends HttpServlet {
 
     @Override
@@ -35,12 +34,20 @@ public class viewServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        ArrayList<ticker> list = readderjson(request, response);
+        String crate = request.getParameter("changerate1") + "";
+        String volume = request.getParameter("vol1") + "";
+        list = fitle(request, response, list, crate, volume);
+        request.setAttribute("list", list);
+        request.getRequestDispatcher("view/home.jsp").forward(request, response);
+    }
+    
+    public static ArrayList<ticker> readderjson(HttpServletRequest request, HttpServletResponse response){
         String markettype = request.getParameter("markettype") + "";
         String cex = request.getParameter("cex") + "";
         ArrayList<ticker> list = (ArrayList<ticker>) request.getSession().getAttribute("list");
         if (!markettype.trim().isEmpty()) {
-//            CEX cexs = new CEX(1, cex , markettype);
-//            request.getSession().setAttribute("cexs", cexs);
             switch (cex) {
                 case "Binance":
                     if (markettype.equals("Spot")) {
@@ -69,15 +76,10 @@ public class viewServlet extends HttpServlet {
             }
             request.getSession().setAttribute("list", list);
         }
-        
-        String crate = request.getParameter("changerate1") + "";
-        String volume = request.getParameter("vol1") + "";
-        list = fitle(request, response, list, crate, volume);
-        request.setAttribute("list", list);
-        request.getRequestDispatcher("view/home.jsp").forward(request, response);
+        return list;
     }
 
-    public ArrayList<ticker> fitle(HttpServletRequest request, HttpServletResponse response,
+    public static ArrayList<ticker> fitle(HttpServletRequest request, HttpServletResponse response,
             ArrayList<ticker> list, String crate,String volume) throws IOException {
         ArrayList<ticker> listlv1 = new ArrayList<>();
         double changerate = -100.0;
@@ -94,7 +96,6 @@ public class viewServlet extends HttpServlet {
                 vol = Double.parseDouble(volume.trim());
             } catch (Exception e) {
             }
-
         }
         if (!crate.isEmpty() && volume.isEmpty()) {
             for (ticker t : list) {
@@ -124,9 +125,10 @@ public class viewServlet extends HttpServlet {
         }
 
     }
-    
+   
     
 
+    
     @Override
     public String getServletInfo() {
         return "Short description";

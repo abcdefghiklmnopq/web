@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controller.ticker;
 
 import java.io.IOException;
@@ -23,11 +19,19 @@ public class tickercontroller extends HttpServlet {
    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<ticker> list = (ArrayList<ticker>) request.getSession().getAttribute("list");
-        viewServlet view = new viewServlet();
-         String crate = request.getParameter("changerate2") + "";
+        
+        ArrayList<ticker> list = viewServlet.readderjson(request, response);
+        
+        String crate = request.getParameter("changerate2") + "";
         String volume = request.getParameter("vol2") + "";
-        list = view.fitle(request, response, list, crate, volume);
+        if(crate!=null || !crate.trim().isEmpty()){
+            request.getSession().setAttribute("crate", crate);
+        }
+        if(volume!=null || !volume.trim().isEmpty()){
+        request.getSession().setAttribute("volume", volume);}
+        crate = (String) request.getSession().getAttribute("crate")+"";
+        volume = (String) request.getSession().getAttribute("volume")+"";
+        list = viewServlet.fitle(request, response, list, crate, volume);
         request.setAttribute("list", list);
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
@@ -46,6 +50,25 @@ public class tickercontroller extends HttpServlet {
         processRequest(request, response);
     }
 
+    
+        public ArrayList<ticker> fitlelv2(HttpServletRequest request, HttpServletResponse response,
+                ArrayList<ticker> list){
+        String crate = request.getParameter("changerate2") + "";
+        String volume = request.getParameter("vol2") + "";
+        if(crate!=null || !crate.trim().isEmpty()){
+            request.getSession().setAttribute("crate", crate);
+        }
+        if(volume!=null || !volume.trim().isEmpty()){
+        request.getSession().setAttribute("volume", volume);
+        }
+        crate = (String) request.getSession().getAttribute("crate");
+        volume = (String) request.getSession().getAttribute("volume");
+        try {
+            list = viewServlet.fitle(request, response, list, crate, volume);
+        } catch (IOException ex) {
+        }
+        return list;
+    }
     /**
      * Returns a short description of the servlet.
      *

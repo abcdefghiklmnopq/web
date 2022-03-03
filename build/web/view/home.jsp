@@ -15,7 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>home Page</title>
         <%
-            
+
             ArrayList<ticker> list = (ArrayList<ticker>) request.getAttribute("list");
             CEX x = (CEX) request.getSession().getAttribute("cexs");
             String markettype = x.getName();
@@ -42,14 +42,24 @@
                 max-width: 500px;
             }
             div{
-                padding: 20px
+                padding: 20px;
+            }
+            .form{
+                border-style:solid;
+                padding: 1spx;
+                border-color: #002752;
+                margin: 10px;
+            }
+
+            input{
+                margin: 10px;
             }
         </style>
-        
+
 
     </head>
     <body>
-       
+
         <div class="select">
             <form action="viewServlet" method="POST" id="searchFrm" >
                 &emsp;&emsp;Market Type:&emsp;
@@ -57,7 +67,7 @@
 
                     <option value="Spot" >Spot</option>
                     <option value="Futures" 
-                            <%if ( markettype.equals("Futures")) {%>
+                            <%if (markettype.equals("Futures")) {%>
                             selected="selected" 
                             <%}%>
                             >Futures</option>
@@ -66,7 +76,7 @@
                 <select name="cex">
                     <option value="Binance">Binance</option>
                     <option value="kukoin" 
-                            <%if ( cex.equals("kukoin")) {%>
+                            <%if (cex.equals("kukoin")) {%>
                             selected="selected" 
                             <%}%>
                             >kukoin</option>
@@ -89,10 +99,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%for (ticker t : list)
-                                
-                            
- {%>
+                        <%for (ticker t : list) {%>
                         <tr>
                             <td><%=t.getName()%></td>
                             <td > &emsp;<%=t.getPrice()%>&emsp;</td>
@@ -106,37 +113,42 @@
             </div>
             <div class="col-md-6 col-sm-12" >
                 <div class="form-container">
-                    <form action="viewServlet" method="POST" >
-                        Alert:<br>
-                        <input type="email" placeholder="Email address" name="email"><br>
-                        Do you want to receive emails: <input type="radio" name="sendeail" value="yes"> YES 
-                        <input type="radio" name="sendeail" value="No"/> NO <br>
-                        <br>
-                        Confguration<br>
-                        Lever 1:<br>
-                        <input type="text" placeholder="% Change Rate" name="changerate1">(%) Change Rate<br>
-                        <input type="text" placeholder=" Volume24h" name="vol1">M&emsp;(USD) Volume 24h <br/>
-                        <input type="submit"  value="Filter"  />
-                    </form>
-                    <form action="list" method="POST" >
-                        Lever 2:<br>
-                        <input type="text" placeholder="% Change Rate" name="changerate2">(%) Change Rate<br>
-                        <input type="text" placeholder=" Volume24h" name="vol2">M&emsp;(USD) Volume 24h <br>
-                        Elasted Time: 
-                        <select name="elastedtime">
-                            <option value="1">1h</option>
-                            <option value="2">2h</option>
-                            <option value="5">5h</option>
-                            <option value="10">10h</option>
-                            <option value="12">12h</option>
-                            <option value="24">24h</option>
-                        </select><br>
-                        <input type="submit"  value="Start" onclick="submitData();"/>
-                        <input type="submit"  value="End" onclick="submitData();"/>
-                    </form>
+                    <div class="form" >
+                        <form action="viewServlet" method="POST"  >
+                            Alert:<br>
+                            <input type="email" placeholder="Email address" name="email"><br>
+                            Do you want to receive emails: <input type="radio" name="sendeail" value="yes"> YES 
+                            <input type="radio" name="sendeail" value="No"/> NO <br>
+                            <br>
+                            Confguration<br>
+                            Lever 1:<br>
+                            <input type="text" placeholder="% Change Rate" name="changerate1">(%) Change Rate<br>
+                            <input type="text" placeholder=" Volume24h" name="vol1">M&emsp;(USD) Volume 24h <br/>
+                            <input type="submit"  value="Filter"  />
+                        </form>
+                    </div>
+                    <div class="form" >
+                        <form action="list" method="POST" id="searchFrm"  >
+                            Lever 2:<br>
+                            <input type="text" placeholder="% Change Rate" name="changerate2">(%) Change Rate<br>
+                            <input type="text" placeholder=" Volume24h" name="vol2">M&emsp;(USD) Volume 24h <br>
+                            &ensp;<select name="elastedtime" id="elastedtime">
+                                <option value="1">1h</option>
+                                <option value="2">2h</option>
+                                <option value="5">5h</option>
+                                <option value="10">10h</option>
+                                <option value="12">12h</option>
+                                <option value="24">24h</option>
+                            </select> &emsp;Elasted Time <br>
+                            <input type="text" value="0" id="time" >&emsp; Minute<br>
+                            <input type="button"  value="Start" onclick="Stat();"/>
+                            <input type="button"  value="End" onclick=""/>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
         <%}%>
+        <script src="js/homejavascript.js" type="text/javascript"></script>
     </body>
 </html>
