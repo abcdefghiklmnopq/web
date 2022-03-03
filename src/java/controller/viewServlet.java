@@ -121,7 +121,6 @@ public class viewServlet extends HttpServlet {
         } else {
             return listlv1;
         }
-
     }
    
     

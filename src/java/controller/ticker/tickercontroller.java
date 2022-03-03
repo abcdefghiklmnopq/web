@@ -24,6 +24,10 @@ public class tickercontroller extends HttpServlet {
         
         String crate = request.getParameter("changerate2") + "";
         String volume = request.getParameter("vol2") + "";
+        String elastedtime = (String) request.getAttribute("elastedtime");
+        if(elastedtime!=null || !crate.trim().isEmpty()){
+            request.getSession().setAttribute("elastedtime", elastedtime);
+        }
         if(crate!=null || !crate.trim().isEmpty()){
             request.getSession().setAttribute("crate", crate);
         }
@@ -70,11 +74,8 @@ public class tickercontroller extends HttpServlet {
         }
         return list;
     }
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    
+        
     @Override
     public String getServletInfo() {
         return "Short description";

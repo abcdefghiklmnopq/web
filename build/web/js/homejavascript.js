@@ -4,13 +4,16 @@
  * and open the template in the editor.
  */
 var hour = document.getElementById("elastedtime").value;
+function change(){
+    hour = document.getElementById("elastedtime").value
+}        
 
 var getvalue = function getvalue(){
 
         var number = document.getElementById("number").value;
         number++;
         document.getElementById("number").value = number;
-        if(number === 20){
+        if(number == hour){
             document.getElementById("searchFrm").submit();
             number=0;
         }
@@ -18,8 +21,8 @@ var getvalue = function getvalue(){
 
 var clear;
 function Stat(){
-    
-    clear= setInterval(getvalue,1000);
+    alert(hour);
+    clear= setInterval(getvalue,hour*2000);
    
 }
 function Stop(){
