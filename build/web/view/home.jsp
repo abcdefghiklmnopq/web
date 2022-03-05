@@ -124,11 +124,7 @@
                 <div class="form-container">
                     <div class="form" >
                         <form action="viewServlet" method="POST"  >
-                            Alert:<br>
-                            <input type="email" placeholder="Email address" name="email"><br>
-                            Do you want to receive emails: <input type="radio" name="sendeail" value="yes"> YES 
-                            <input type="radio" name="sendeail" value="No"/> NO <br>
-                            <br>
+                            
                             Confguration<br>
                             Lever 1:<br>
                             <input type="text" placeholder="% Change Rate" name="changerate1">(%) Change Rate<br>
@@ -138,6 +134,11 @@
                     </div>
                     <div class="form" >
                         <form action="list" method="POST" id="searchFrm"  >
+                            Alert:<br>
+                            <input type="email" placeholder="Email address" name="email"><br>
+                            Do you want to receive emails: <input type="radio" name="sendeail" value="yes"> YES 
+                            <input type="radio" name="sendeail" value="No"/> NO <br>
+                            <br>
                             Lever 2:<br>
                             <input type="text" placeholder="% Change Rate" name="changerate2"
                                    <% if( cratelv2!=null && !cratelv2.trim().isEmpty()){%>
