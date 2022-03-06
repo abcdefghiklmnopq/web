@@ -19,6 +19,10 @@ public class Account {
     private boolean gender;
     private Date dob;
     private String password;
+    private String Changerate;
+    private String Volume;
+    private int time;
+    private boolean sendemail;
 
     public String getEmail() {
         return email;
@@ -27,6 +31,39 @@ public class Account {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public boolean isSendemail() {
+        return sendemail;
+    }
+
+    public void setSendemail(boolean sendemail) {
+        this.sendemail = sendemail;
+    }
+
+    public String getChangerate() {
+        return Changerate;
+    }
+
+    public void setChangerate(String Changerate) {
+        this.Changerate = Changerate;
+    }
+
+    public String getVolume() {
+        return Volume;
+    }
+
+    public void setVolume(String Volume) {
+        this.Volume = Volume;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
 
     public String getPhone() {
         return phone;

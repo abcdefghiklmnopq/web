@@ -24,9 +24,19 @@
                     labels: ["January", "February", "March", "April", "May", "June", "July"],
                     datasets: [{
                             label: "My First dataset",
-                            backgroundColor: 'rgb(255, 99, 132)',
-                            borderColor: 'rgb(255, 99, 132)',
-                            data: [2, 10, 5, 25, 20, 20, 20],
+//                            backgroundColor: 'rgb(255, 99, 132)',
+//                            borderColor: 'rgb(255, 99, 132)',
+                            fillColor: "rgba(151,249,190,0.5)",
+                            strokeColor: "rgba(255,255,255,1)",
+                            pointColor: "rgba(220,220,220,1)",
+                            pointStrokeColor: "#fff",
+                            data: [2, 10, 5, 25, 20, 20, 20]
+                        }, {
+                            fillColor: "rgba(252,147,65,0.5)",
+                            strokeColor: "rgba(255,255,255,1)",
+                            pointColor: "rgba(173,173,173,1)",
+                            pointStrokeColor: "#fff",
+                            data: [28, 68, 40, 19, 90]
                         }]
                 },
 

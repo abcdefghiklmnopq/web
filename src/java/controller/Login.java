@@ -33,7 +33,9 @@ public class Login extends HttpServlet {
         AccountDBContext adb = new AccountDBContext();
         Account a = adb.getAccount(email, password);
         if(a!=null){
-            response.sendRedirect("index.html");
+            request.getSession().setAttribute("Account", a);
+            response.sendRedirect("viewServlet");
+            
         }else{
             response.sendRedirect("view/createaccount.jsp");
         }
