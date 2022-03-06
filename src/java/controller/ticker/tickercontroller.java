@@ -1,9 +1,9 @@
 package controller.ticker;
 
+import controller.BaseAuthController;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.ticker;
@@ -17,7 +17,7 @@ import model.JsonReader;
  *
  * @author thand
  */
-public class tickercontroller extends HttpServlet {
+public class tickercontroller extends BaseAuthController {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,7 +42,9 @@ public class tickercontroller extends HttpServlet {
         boolean send = sendeail.equals("yes");
         Account a = (Account) request.getSession().getAttribute("Account");
         AccountDBContext adbc = new AccountDBContext();
-        int t = (int) request.getSession().getAttribute("elastedtime");
+        String x = (String) request.getSession().getAttribute("elastedtime")+"";
+        int t = Integer.parseInt(x.trim());
+        System.out.println(t);
         adbc.updatefilter(crate, volume, t, send, a.getEmail());
         list = viewServlet.fitle(request, response, list, crate, volume);
         request.setAttribute("list", list);
@@ -51,7 +53,7 @@ public class tickercontroller extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Account a = (Account) request.getSession().getAttribute("Account");
         ArrayList<ticker> list = JsonReader.getliststickerBinanceSpot();
@@ -68,7 +70,7 @@ public class tickercontroller extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

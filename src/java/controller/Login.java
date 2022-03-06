@@ -21,7 +21,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("view/login.jsp").forward(request, response);
+        response.sendRedirect("view/login.jsp");
     }
 
 
@@ -37,6 +37,7 @@ public class Login extends HttpServlet {
             response.sendRedirect("viewServlet");
             
         }else{
+            request.getSession().setAttribute("account", null);
             response.sendRedirect("view/createaccount.jsp");
         }
         

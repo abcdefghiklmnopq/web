@@ -32,7 +32,7 @@ public class AccountDBContext extends DBContext {
                 + "      ,[Volume]\n"
                 + "      ,[time]\n"
                 + "      ,[sendemail]\n"
-                + "  FROM [account]"
+                + "  FROM [account] a"
                 + "  where a.email =? and a.password =?";
         try {
             stm = connection.prepareStatement(sql);
@@ -188,6 +188,10 @@ public class AccountDBContext extends DBContext {
             }
         }
 
+    }
+
+    public int getPermission(String email, String url) {
+        return 1;
     }
 
 }
