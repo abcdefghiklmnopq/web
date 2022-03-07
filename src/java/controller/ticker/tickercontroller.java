@@ -27,7 +27,9 @@ public class tickercontroller extends BaseAuthController {
         String crate = request.getParameter("changerate2") + "";
         String volume = request.getParameter("vol2") + "";
         String elastedtime = (String) request.getParameter("elastedtime");
-
+        if(sendeail!=null || sendeail.trim().length()!=0){
+            request.getSession().setAttribute("sendeail", sendeail);
+        }
         if (elastedtime != null || crate.trim().length() != 0) {
             request.getSession().setAttribute("elastedtime", elastedtime);
         }

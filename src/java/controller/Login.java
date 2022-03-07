@@ -35,7 +35,6 @@ public class Login extends HttpServlet {
         if(a!=null){
             request.getSession().setAttribute("Account", a);
             response.sendRedirect("viewServlet");
-            
         }else{
             request.getSession().setAttribute("account", null);
             response.sendRedirect("view/createaccount.jsp");

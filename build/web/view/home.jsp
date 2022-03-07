@@ -4,6 +4,7 @@
     Author     : thand
 --%>
 
+<%@page import="model.Account"%>
 <%@page import="model.CEX"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.ticker"%>
@@ -22,7 +23,10 @@
             String cex = x.getCexname();
             String cratelv2 = (String) request.getSession().getAttribute("crate");
             String volumelv2 = (String) request.getSession().getAttribute("volume");
-            String elastedtime = (String) request.getSession().getAttribute("elastedtime")+"";
+            String sendeail = (String) request.getSession().getAttribute("sendeail")+"";
+            String elastedtime = (String) request.getSession().getAttribute("elastedtime") + "";
+            Account account = (Account) request.getSession().getAttribute("Account");
+            
             
         %>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -63,7 +67,7 @@
 
     </head>
     <body <%
-        String a = (String) request.getAttribute("a")+"";
+        String a = (String) request.getAttribute("a") + "";
         if (a.equals("a")) {%>
         onload="Stat()"
         <%}%>
@@ -124,7 +128,7 @@
                 <div class="form-container">
                     <div class="form" >
                         <form action="viewServlet" method="POST"  >
-                            
+
                             Confguration<br>
                             Lever 1:<br>
                             <input type="text" placeholder="% Change Rate" name="changerate1">(%) Change Rate<br>
@@ -133,35 +137,45 @@
                         </form>
                     </div>
                     <div class="form" >
+                        
                         <form action="list" method="POST" id="searchFrm"  >
+                            
+                            <%if (account != null) {%>
                             Alert:<br>
-                            <input type="email" placeholder="Email address" name="email"><br>
-                            Do you want to receive emails: <input type="radio" name="sendeail" value="yes"> YES 
-                            <input type="radio" name="sendeail" value="No"/> NO <br>
+                            <h6> Email: <%=account.getEmail() %> </h6>
+                            Do you want to receive emails:
+                            <input type="radio" name="sendeail"
+                                   <%=(sendeail.equals("yes"))?"checked=\"checked\"":""%> 
+                                   value="yes" > YES 
+                            <input type="radio" name="sendeail"
+                                   <%=(sendeail.equals("No"))?"checked=\"checked\"":""%> 
+                                   value="No"/> NO <br>
+                            <%}%>
                             <br>
                             Lever 2:<br>
                             <input type="text" placeholder="% Change Rate" name="changerate2"
-                                   <% if( cratelv2!=null && !cratelv2.trim().isEmpty()){%>
+                                   <% if (cratelv2 != null && !cratelv2.trim().isEmpty()) {%>
                                    value="<%=cratelv2%>"
                                    <%}%>
                                    >(%) Change Rate<br>
                             <input type="text" placeholder=" Volume24h" name="vol2"
-                                   <% if( volumelv2!=null && !volumelv2.trim().isEmpty()){%>
+                                   <% if (volumelv2 != null && !volumelv2.trim().isEmpty()) {%>
                                    value="<%=volumelv2%>"
                                    <%}%>
                                    >M&emsp;(USD) Volume 24h <br>
                             &ensp;<select name="elastedtime" id="elastedtime" onchange="change()">
-                                <option value="1" <%=elastedtime.equals("1")?"selected=\"selected\"":"" %>>1h</option>
-                                <option value="2" <%=elastedtime.equals("2")?"selected=\"selected\"":"" %>>2h</option>
-                                <option value="5" <%=elastedtime.equals("5")?"selected=\"selected\"":"" %>>5h</option>
-                                <option value="10" <%=elastedtime.equals("10")?"selected=\"selected\"":"" %>>10h</option>
-                                <option value="12" <%=elastedtime.equals("12")?"selected=\"selected\"":"" %>>12h</option>
-                                <option value="24" <%=elastedtime.equals("24")?"selected=\"selected\"":"" %>>24h</option>
+                                <option value="1" <%=elastedtime.equals("1") ? "selected=\"selected\"" : ""%>>1h</option>
+                                <option value="2" <%=elastedtime.equals("2") ? "selected=\"selected\"" : ""%>>2h</option>
+                                <option value="5" <%=elastedtime.equals("5") ? "selected=\"selected\"" : ""%>>5h</option>
+                                <option value="10" <%=elastedtime.equals("10") ? "selected=\"selected\"" : ""%>>10h</option>
+                                <option value="12" <%=elastedtime.equals("12") ? "selected=\"selected\"" : ""%>>12h</option>
+                                <option value="24" <%=elastedtime.equals("24") ? "selected=\"selected\"" : ""%>>24h</option>
                             </select> &emsp;Elasted Time <br>
                             <input type="text"  value="0" id="number" /> so phut troi qua!
                             <input type="submit"  value="Start" onclick="Stat();"/>
                             <input type="button"  value="End" onclick="Stop();"/>
                         </form>
+                        
                     </div>
                 </div>
             </div>
