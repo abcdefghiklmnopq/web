@@ -18,6 +18,12 @@ import model.Account;
  */
 public class AccountDBContext extends DBContext {
 
+    /**
+     *
+     * @param email
+     * @param password
+     * @return
+     */
     public Account getAccount(String email, String password) {
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -74,6 +80,11 @@ public class AccountDBContext extends DBContext {
         return null;
     }
 
+    /**
+     *
+     * @param email
+     * @return
+     */
     public boolean IsEmail(String email) {
         String sql = "SELECT [email]\n"
                 + "  FROM [account] a\n"
@@ -108,6 +119,10 @@ public class AccountDBContext extends DBContext {
         return false;
     }
 
+    /**
+     *
+     * @param s
+     */
     public void insertAccount(Account s) {
 
         String sql = "SELECT  [email]\n"
@@ -152,6 +167,14 @@ public class AccountDBContext extends DBContext {
         }
     }
 
+    /**
+     *
+     * @param Changerate
+     * @param Volume
+     * @param time
+     * @param sendemail
+     * @param email
+     */
     public void updatefilter(String Changerate, String Volume, int time, boolean sendemail, String email) {
         String sql = "UPDATE [account]\n"
                 + "   SET \n"
@@ -185,6 +208,12 @@ public class AccountDBContext extends DBContext {
 
     }
 
+    /**
+     *
+     * @param email
+     * @param url
+     * @return
+     */
     public int getPermission(String email, String url) {
         return 1;
     }

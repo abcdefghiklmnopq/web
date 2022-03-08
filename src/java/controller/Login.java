@@ -32,13 +32,7 @@ public class Login extends HttpServlet {
         response.sendRedirect("view/login.jsp");
     }
 
-    /**
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
