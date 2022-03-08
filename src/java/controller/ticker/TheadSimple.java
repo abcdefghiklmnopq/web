@@ -58,25 +58,24 @@ public class TheadSimple implements Runnable {
      * @param request
      * @param response
      */
-    public void runthead(HttpServletRequest request, HttpServletResponse response){
+//    public void runthead(HttpServletRequest request, HttpServletResponse response){
 //        long h = 60*1000;
 //		TheadSimple runable = new TheadSimple(h);
 //		Thread t1 = new Thread(runable);
 //		t1.start();
 //                
 //        
-    }
+//    }
     
     /**
      *
      * @param args
      */
-    public static void main(String args[]) {
+//    public static void main(String args[]) {
 //                long h = 60*1000;
 //		TheadSimple runable = new TheadSimple(h);
 //		Thread t1 = new Thread(runable);
 //		t1.start();
-                
-	}
+//	}
 
 }
