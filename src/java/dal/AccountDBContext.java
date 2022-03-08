@@ -104,16 +104,11 @@ public class AccountDBContext extends DBContext {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                if (rs != null) {
-                    rs.close();
-                }
                 if (stm != null) {
                     stm.close();
                 }
-                if (connection != null) {
-                    connection.close();
-                }
             } catch (SQLException ex) {
+                Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return false;
@@ -125,37 +120,42 @@ public class AccountDBContext extends DBContext {
      */
     public void insertAccount(Account s) {
 
-        String sql = "SELECT  [email]\n"
-                + "      ,[phone]\n"
-                + "      ,[firstname]\n"
-                + "      ,[lastname]\n"
-                + "      ,[gender]\n"
-                + "      ,[dob]\n"
-                + "      ,[password]\n"
-                + "      ,[Changerate]\n"
-                + "      ,[Volume]\n"
-                + "      ,[time]\n"
-                + "      ,[sendemail]\n"
-                + "  FROM [account]";
-        PreparedStatement stm = null;
+        String sql = "INSERT INTO [account]\n"
+                + "           ([email]\n"
+                + "           ,[phone]\n"
+                + "           ,[firstname]\n"
+                + "           ,[lastname]\n"
+                + "           ,[gender]\n"
+                + "           ,[dob]\n"
+                + "           ,[password]\n"
+                + "           )\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           )";
+        PreparedStatement stminsert = null;
         try {
-                connection.prepareStatement(sql);
-            stm = connection.prepareStatement(sql);
-//            stm.setString(1, s.getEmail());
-//            stm.setString(2, s.getPhone());
-//            stm.setNString(3, s.getFirstname());
-//            stm.setNString(4, s.getLastname());
-//            stm.setBoolean(5, s.isGender());
-//            stm.setDate(6, s.getDob());
-//            stm.setString(7, s.getPassword());
-            stm.executeUpdate();
+            stminsert = connection.prepareStatement(sql);
+            stminsert.setString(1, s.getEmail());
+            stminsert.setString(2, s.getPhone());
+            stminsert.setNString(3, s.getFirstname());
+            stminsert.setNString(4, s.getLastname());
+            stminsert.setBoolean(5, s.isGender());
+            stminsert.setDate(6, s.getDob());
+            stminsert.setString(7, s.getPassword());
+            stminsert.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 
             try {
-                if (stm != null) {
-                    stm.close();
+                if (stminsert != null) {
+                    stminsert.close();
                 }
                 if (connection != null) {
                     connection.close();
