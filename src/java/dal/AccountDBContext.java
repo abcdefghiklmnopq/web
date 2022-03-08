@@ -109,51 +109,46 @@ public class AccountDBContext extends DBContext {
     }
 
     public void insertAccount(Account s) {
-        String sql = "INSERT INTO [account]\n"
-                + "           ([email]\n"
-                + "           ,[phone]\n"
-                + "           ,[firstname]\n"
-                + "           ,[lastname]\n"
-                + "           ,[gender]\n"
-                + "           ,[dob]\n"
-                + "           ,[password])\n"
-                + "     VALUES\n"
-                + "           (?\n"
-                + "           ,?\n"
-                + "           ,?\n"
-                + "           ,?\n"
-                + "           ,?\n"
-                + "           ,?\n"
-                + "           ,?)";
-        PreparedStatement stm = null;
 
+        String sql = "SELECT  [email]\n"
+                + "      ,[phone]\n"
+                + "      ,[firstname]\n"
+                + "      ,[lastname]\n"
+                + "      ,[gender]\n"
+                + "      ,[dob]\n"
+                + "      ,[password]\n"
+                + "      ,[Changerate]\n"
+                + "      ,[Volume]\n"
+                + "      ,[time]\n"
+                + "      ,[sendemail]\n"
+                + "  FROM [account]";
+        PreparedStatement stm = null;
         try {
+                connection.prepareStatement(sql);
             stm = connection.prepareStatement(sql);
-            stm.setString(1, s.getEmail());
-            stm.setString(2, s.getPhone());
-            stm.setNString(3, s.getFirstname());
-            stm.setNString(4, s.getLastname());
-            stm.setBoolean(5, s.isGender());
-            stm.setDate(6, s.getDob());
-            stm.setString(7, s.getPassword());
+//            stm.setString(1, s.getEmail());
+//            stm.setString(2, s.getPhone());
+//            stm.setNString(3, s.getFirstname());
+//            stm.setNString(4, s.getLastname());
+//            stm.setBoolean(5, s.isGender());
+//            stm.setDate(6, s.getDob());
+//            stm.setString(7, s.getPassword());
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            if (stm != null) {
-                try {
+
+            try {
+                if (stm != null) {
                     stm.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
-            if (connection != null) {
-                try {
+                if (connection != null) {
                     connection.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
     }
 

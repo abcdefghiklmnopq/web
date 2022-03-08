@@ -25,7 +25,8 @@ public class CreateAccount extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("view/createaccount.jsp").forward(request, response);
+        response.sendRedirect("view/createaccount.jsp");
+//        request.getRequestDispatcher().forward(request, response);
     }
 
 
@@ -54,6 +55,10 @@ public class CreateAccount extends HttpServlet {
             a.setGender(gender);
             a.setDob(dob);
             a.setPassword(password);
+            a.setChangerate("1");
+            a.setVolume("1");
+            a.setTime(2);
+            a.setSendemail(true);
             adb.insertAccount(a);
         }
         response.sendRedirect("view/login.jsp");
