@@ -19,6 +19,13 @@ import model.JsonReader;
  */
 public class tickercontroller extends BaseAuthController {
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -54,6 +61,13 @@ public class tickercontroller extends BaseAuthController {
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -71,14 +85,23 @@ public class tickercontroller extends BaseAuthController {
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-
-
+    /**
+     *
+     * @return
+     */
     @Override
     public String getServletInfo() {
         return "Short description";

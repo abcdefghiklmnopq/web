@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Account;
 
+/**
+ *
+ * @author thand
+ */
 public abstract class BaseAuthController extends HttpServlet {
 
     private boolean isAuthenticated(HttpServletRequest request)
@@ -30,7 +34,13 @@ public abstract class BaseAuthController extends HttpServlet {
         }
     }
     
-   
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,8 +54,24 @@ public abstract class BaseAuthController extends HttpServlet {
             response.getWriter().println("access denied!");
         }
     }
+
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected abstract void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException;
+
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected abstract void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException;
     /**
@@ -70,7 +96,10 @@ public abstract class BaseAuthController extends HttpServlet {
         }
     }
 
-
+    /**
+     *
+     * @return
+     */
     @Override
     public String getServletInfo() {
         return "Short description";

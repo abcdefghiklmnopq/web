@@ -11,8 +11,20 @@ import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
+/**
+ *
+ * @author thand
+ */
 public class SendMail {
 
+    /**
+     *
+     * @param to
+     * @param sub
+     * @param msg
+     * @param user
+     * @param pass
+     */
     public static void send(String to, String sub,
             String msg, final String user, final String pass) {
         //create an instance of Properties Class   
@@ -59,6 +71,10 @@ public class SendMail {
         }
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         String subject = "Your order has been processing.";
         String message = "hello"

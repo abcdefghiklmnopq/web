@@ -21,6 +21,10 @@ import java.util.logging.Logger;
 import model.binance.Tickerbinance;
 import model.kuCoin.Tickerkucoin;
 
+/**
+ *
+ * @author thand
+ */
 public class JsonReader {
 
     private static String readAll(Reader rd) throws IOException {
@@ -44,6 +48,10 @@ public class JsonReader {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<ticker> gettickerkucoinSpot() {
         String url = "https://api.kucoin.com/api/v1/market/allTickers";
         String json = null;
@@ -75,6 +83,10 @@ public class JsonReader {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<ticker> gettickerkucoinFuteres() {
         String url = "https://api.kucoin.com/api/v1/market/allTickers";
         String json = null;
@@ -105,6 +117,10 @@ public class JsonReader {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<ticker> getliststickerBinanceSpot() {
         String url = "https://api.binance.com/api/v3/ticker/24hr";
         String json = null;
@@ -132,6 +148,10 @@ public class JsonReader {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<ticker> getliststickerBinanceFutures() {
         String url = "https://fapi.binance.com/fapi/v1/ticker/24hr";
         String json = null;
@@ -158,6 +178,11 @@ public class JsonReader {
         }
         return null;
     }
+
+    /**
+     *
+     * @return
+     */
     public static String getlist(){
         String url = "https://api.binance.com/api/v3/ticker/24hr";
         String json = null;
@@ -172,6 +197,11 @@ public class JsonReader {
         
     }
 
+    /**
+     *
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
 
         for (int i = 0; i < 10; i++) {

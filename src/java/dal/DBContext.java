@@ -20,7 +20,15 @@ import java.util.logging.Logger;
  * @author thand
  */
 public class DBContext {
+
+    /**
+     *
+     */
     protected  Connection connection;
+
+    /**
+     *
+     */
     public DBContext()
     {
         try {

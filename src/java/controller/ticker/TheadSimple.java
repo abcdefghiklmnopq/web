@@ -23,7 +23,13 @@ public class TheadSimple implements Runnable {
     private final HttpServletResponse response;
     private ArrayList<ticker> list;
 
-
+    /**
+     *
+     * @param millis
+     * @param request
+     * @param response
+     * @param list
+     */
     public TheadSimple(long millis, HttpServletRequest request, HttpServletResponse response, ArrayList<ticker> list) {
         this.millis = millis;
         this.request = request;
@@ -47,6 +53,11 @@ public class TheadSimple implements Runnable {
         }
     }
     
+    /**
+     *
+     * @param request
+     * @param response
+     */
     public void runthead(HttpServletRequest request, HttpServletResponse response){
 //        long h = 60*1000;
 //		TheadSimple runable = new TheadSimple(h);
@@ -56,6 +67,10 @@ public class TheadSimple implements Runnable {
 //        
     }
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String args[]) {
 //                long h = 60*1000;
 //		TheadSimple runable = new TheadSimple(h);

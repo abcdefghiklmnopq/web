@@ -15,9 +15,19 @@ import model.CEX;
 import model.JsonReader;
 import model.ticker;
 
-
+/**
+ *
+ * @author thand
+ */
 public class viewServlet extends HttpServlet {
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,6 +39,13 @@ public class viewServlet extends HttpServlet {
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -41,6 +58,12 @@ public class viewServlet extends HttpServlet {
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
     
+    /**
+     *
+     * @param request
+     * @param response
+     * @return
+     */
     public static ArrayList<ticker> readderjson(HttpServletRequest request, HttpServletResponse response){
         String markettype = request.getParameter("markettype") + "";
         String cex = request.getParameter("cex") + "";
@@ -77,6 +100,16 @@ public class viewServlet extends HttpServlet {
         return list;
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @param list
+     * @param crate
+     * @param volume
+     * @return
+     * @throws IOException
+     */
     public static ArrayList<ticker> fitle(HttpServletRequest request, HttpServletResponse response,
             ArrayList<ticker> list, String crate,String volume) throws IOException {
         ArrayList<ticker> listlv1 = new ArrayList<>();
@@ -123,9 +156,10 @@ public class viewServlet extends HttpServlet {
         }
     }
    
-    
-
-    
+    /**
+     *
+     * @return
+     */
     @Override
     public String getServletInfo() {
         return "Short description";
