@@ -3,51 +3,40 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.history;
 
-import dal.AccountDBContext;
+import dal.HistoryDBcontext;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Account;
+import model.History;
 
 /**
  *
  * @author thand
  */
-public class Login extends HttpServlet {
+public class historycontroller extends HttpServlet {
 
-    /**
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
+  
+
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("view/login.jsp");
+        Account a= (Account) request.getSession().getAttribute("account");
+        HistoryDBcontext hdb = new HistoryDBcontext();
+        ArrayList<History> historys = hdb.getdatalinechart("12345a@gmail.com");
+        request.setAttribute("historys", historys);
+        request.getRequestDispatcher("view/history.jsp").forward(request, response);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        AccountDBContext adb = new AccountDBContext();
-        Account a = adb.getAccount(email, password);
-        if(a!=null){
-            request.getSession().setAttribute("account", a);
-            response.sendRedirect("viewServlet");
-        }else{
-            request.getSession().setAttribute("account", null);
-            response.sendRedirect("view/createaccount.jsp");
-        }
-        
     }
 
     /**

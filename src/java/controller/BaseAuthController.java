@@ -21,7 +21,7 @@ public abstract class BaseAuthController extends HttpServlet {
 
     private boolean isAuthenticated(HttpServletRequest request)
     {
-        Account account = (Account)request.getSession().getAttribute("Account");
+        Account account = (Account)request.getSession().getAttribute("account");
         if(account == null)
             return false;
         else

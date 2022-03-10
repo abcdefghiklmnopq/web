@@ -16,6 +16,10 @@
         <servlet-name>tickercontroller</servlet-name>
         <servlet-class>controller.ticker.tickercontroller</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>historycontroller</servlet-name>
+        <servlet-class>controller.history.historycontroller</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>tickercontroller</servlet-name>
         <url-pattern>/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>historycontroller</servlet-name>
+        <url-pattern>/history</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

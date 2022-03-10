@@ -49,7 +49,7 @@ public class tickercontroller extends BaseAuthController {
         crate = (String) request.getSession().getAttribute("crate") + "";
         volume = (String) request.getSession().getAttribute("volume") + "";
         boolean send = sendeail.equals("yes");
-        Account a = (Account) request.getSession().getAttribute("Account");
+        Account a = (Account) request.getSession().getAttribute("account");
         AccountDBContext adbc = new AccountDBContext();
         String x = (String) request.getSession().getAttribute("elastedtime")+"";
         int t = Integer.parseInt(x.trim());
@@ -71,7 +71,7 @@ public class tickercontroller extends BaseAuthController {
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Account a = (Account) request.getSession().getAttribute("Account");
+        Account a = (Account) request.getSession().getAttribute("account");
         ArrayList<ticker> list = JsonReader.getliststickerBinanceSpot();
         CEX cexs = new CEX(1, "Binance", "Spot");
         request.getSession().setAttribute("cexs", cexs);
@@ -82,6 +82,7 @@ public class tickercontroller extends BaseAuthController {
         request.getSession().setAttribute("volume", a.getVolume());
         request.setAttribute("a", "a");
         request.setAttribute("list", list);
+        //send email
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
 

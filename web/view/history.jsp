@@ -4,11 +4,22 @@
     Author     : thand
 --%>
 
+<%@page import="model.History"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>history Page</title>
+        <%
+            ArrayList<History> historys = (ArrayList<History>) request.getAttribute("historys");
+            float amount=0;
+        %>
+    </head>
     <body>
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
         <canvas id="myChart" width="500" height="200" style="border:1px solid #d3d3d3;">
             Your browser does not support the HTML canvas tag.</canvas>
@@ -16,33 +27,40 @@
         <script>
             var ctx = document.getElementById('myChart').getContext('2d');
             var chart = new Chart(ctx, {
-                // The type of chart we want to create
-                type: 'line',
+            // The type of chart we want to create
+            type: 'line',
+                    // The data for our dataset
+                    data: {
 
-                // The data for our dataset
-                data: {
-                    labels: ["January", "February", "March", "April", "May", "June", "July"],
-                    datasets: [{
+                    labels: [<%for (int i = 0; i < historys.size(); i++) {
+                            if (i == historys.size() - 1) {%>
+                                "<%=historys.get(i).getTime()%>"
+                                <%} else {%>
+                                        "",
+                                <%}
+                            }%>],
+                            datasets: [{
                             label: "My First dataset",
-//                            backgroundColor: 'rgb(255, 99, 132)',
-//                            borderColor: 'rgb(255, 99, 132)',
-                            fillColor: "rgba(151,249,190,0.5)",
-                            strokeColor: "rgba(255,255,255,1)",
-                            pointColor: "rgba(220,220,220,1)",
-                            pointStrokeColor: "#fff",
-                            data: [2, 10, 5, 25, 20, 20, 20]
-                        }, {
-                            fillColor: "rgba(252,147,65,0.5)",
-                            strokeColor: "rgba(255,255,255,1)",
-                            pointColor: "rgba(173,173,173,1)",
-                            pointStrokeColor: "#fff",
-                            data: [28, 68, 40, 19, 90]
-                        }]
-                },
-
-                // Configuration options go here
-                options: {}
-            });
+                                    backgroundColor: 'rgba(255, 255, 255,0.1)',
+                                    borderColor: 'black',
+                                    fillColor: "#fff",
+                                    strokeColor: "#fff)",
+                                    pointColor: "#fff",
+                                    pointStrokeColor: "#fff",
+                                    data: [<%for (int i = 0; i < historys.size(); i++) {
+                                        if (i == historys.size() - 1) {%>
+                                            "<%=(amount+=historys.get(i).getAmount())%>"
+                                            <%} else {%>
+                                                    "<%=(amount+=historys.get(i).getAmount())%>",
+                                            <%}
+                                        }%>]
+                            }]
+                    },
+                    // Configuration options go here
+                    options: {
+                    }
+            }
+            );
         </script>
 
     </body>

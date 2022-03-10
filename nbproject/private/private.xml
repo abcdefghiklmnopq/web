@@ -3,12 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/src/java/dal/AccountDBContext.java</file>
+            <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/src/java/controller/viewServlet.java</file>
+            <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/src/java/controller/history/historycontroller.java</file>
             <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/src/java/controller/ticker/tickercontroller.java</file>
             <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/src/java/controller/CreateAccount.java</file>
+            <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/web/view/history.jsp</file>
+            <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/web/view/createaccount.jsp</file>
             <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/src/java/controller/Login.java</file>
-            <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/src/java/model/SendMail.java</file>
-            <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/web/view/login.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -78,8 +78,8 @@ public class SendMail {
     public static void main(String[] args) {
         String subject = "Your order has been processing.";
         String message = "hello"
-                + "minh beo ";
-        SendMail.send("minh1812001@gmail.com", subject, message, "abc968593@gmail.com", "12345a6789");
+                + "hello tu ";
+        SendMail.send("tunqhe150968@fpt.edu.vn", subject, message, "abc968593@gmail.com", "12345a6789");
         System.out.println("đã gửi mail thanh cong!");
         //vd để gửi email tới "dich@gmail.com" bằng email "nguon@gmail.com" pass "123456"
 //        SendMail.send("dich@gmail.com", subject, message, "nguon@gmail.com", "123456");

@@ -25,7 +25,7 @@
             String volumelv2 = (String) request.getSession().getAttribute("volume");
             String sendeail = (String) request.getSession().getAttribute("sendeail")+"";
             String elastedtime = (String) request.getSession().getAttribute("elastedtime") + "";
-            Account account = (Account) request.getSession().getAttribute("Account");
+            Account account = (Account) request.getSession().getAttribute("account");
             
             
         %>
