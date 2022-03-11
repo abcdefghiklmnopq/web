@@ -5,6 +5,7 @@
  */
 package controller.history;
 
+import controller.BaseAuthController;
 import dal.HistoryDBcontext;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,11 +17,11 @@ import model.Account;
 import model.History;
 
 
-public class SearchController extends HttpServlet {
+public class SearchController extends BaseAuthController {
 
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Account a = (Account) request.getSession().getAttribute("account");
         HistoryDBcontext hdb = new HistoryDBcontext();
@@ -30,7 +31,7 @@ public class SearchController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
     }

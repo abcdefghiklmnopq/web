@@ -33,14 +33,20 @@ public class insertordercontroller extends BaseAuthController {
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String Type=request.getParameter("Type");
+        Account a = (Account) request.getSession().getAttribute("account");
+        HistoryDBcontext hdb = new HistoryDBcontext();
+        History h= hdb.getOrderLast();
+        long id = h.getId()+1;
+        String Type =request.getParameter("Type");
         String Time = request.getParameter("Time");
         String Comment = request.getParameter("Comment");
         String Symbol = request.getParameter("Symbol");
         String Amount= request.getParameter("Amount");
-        
-        
+        String email = a.getEmail();
+        hdb.insertOrder(h);
+//        request.getRequestDispatcher("search").forward(request, response);
+        response.sendRedirect("search");
+    
     }
 
     

@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author thand
  */
 public class History {
-    private float id;
+    private long id;
     private String Type;
     private Date time;
     private String Comment;
@@ -20,11 +20,11 @@ public class History {
     private float Amount;
     private String email;
 
-    public float getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(float id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -4,8 +4,10 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import model.Account;
+import model.History;
+import java.util.ArrayList;
 
-public final class insertorder_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class searchorder_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -46,11 +48,14 @@ public final class insertorder_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        ");
 
+            ArrayList<History> historys = (ArrayList<History>) request.getAttribute("historys");
             Account a = (Account) request.getSession().getAttribute("account");
         
       out.write("\n");
@@ -58,40 +63,55 @@ public final class insertorder_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <title>JSP Page</title>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
-      out.write("        <h1>Hello World!</h1>\n");
+      out.write("        <h1>Hello ");
+      out.print((a.getLastname()+"&nbsp;"+a.getFirstname()));
+      out.write("!</h1>\n");
+      out.write("        <h1><a href=\"insertorder\"> Add Order</a></h1>\n");
+      out.write("        <br>\n");
       out.write("        <table border=\"1\">\n");
-      out.write("\n");
+      out.write("            <thead>\n");
+      out.write("                <tr>\n");
+      out.write("                    <th>ID</th>\n");
+      out.write("                    <th>Type</th>\n");
+      out.write("                    <th>Time</th>\n");
+      out.write("                    <th>Comment</th>\n");
+      out.write("                    <th>Symbol</th>\n");
+      out.write("                    <th>Amount</th>\n");
+      out.write("                </tr>\n");
+      out.write("            </thead>\n");
       out.write("            <tbody>\n");
-      out.write("            <form name=\"form\" action=\"insertorder\" method=\"POST\">\n");
+      out.write("                ");
+for (History h : historys) {
       out.write("\n");
       out.write("                <tr>\n");
-      out.write("                    <td>Type: </td>\n");
-      out.write("                    <td><input type=\"text\" name=\"Type\"></td>\n");
+      out.write("                    <td>");
+      out.print(h.getId());
+      out.write("</td>\n");
+      out.write("                    <td>");
+      out.print(h.getType());
+      out.write("</td>\n");
+      out.write("                    <td>");
+      out.print(h.getTime());
+      out.write("</td>\n");
+      out.write("                    <td>");
+      out.print(h.getSymbol());
+      out.write("</td>\n");
+      out.write("                    <td>");
+      out.print(h.getAmount());
+      out.write("</td>\n");
+      out.write("                    <td>");
+      out.print(h.getComment());
+      out.write("</td>\n");
       out.write("                </tr>\n");
-      out.write("                <tr>\n");
-      out.write("                    <td>Time</td>\n");
-      out.write("                    <td><input type=\"date\" name=\"Time\"></td>\n");
-      out.write("                </tr>\n");
-      out.write("                <tr>\n");
-      out.write("                    <td>Comment</td>\n");
-      out.write("                    <td><input type=\"text\" name=\"Comment\"></td>\n");
-      out.write("                </tr>\n");
-      out.write("                <tr>\n");
-      out.write("                    <td>Symbol</td>\n");
-      out.write("                    <td><input type=\"text\" name=\"Symbol\"></td>\n");
-      out.write("                </tr>\n");
-      out.write("                <tr>\n");
-      out.write("                    <td>Amount</td>\n");
-      out.write("                    <td><input type=\"text\" name=\"Amount\"></td>\n");
-      out.write("                </tr>\n");
-      out.write("                <tr>\n");
-      out.write("                    <td></td>\n");
-      out.write("                    <td><input type=\"submit\" value=\"save\"></td>\n");
-      out.write("                </tr>\n");
-      out.write("            </form>\n");
-      out.write("        </tbody>\n");
-      out.write("    </table>\n");
-      out.write("</body>\n");
+      out.write("                ");
+}
+      out.write("\n");
+      out.write("\n");
+      out.write("            </tbody>\n");
+      out.write("        </table>\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){

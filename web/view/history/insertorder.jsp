@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <td>Time</td>
-                    <td><input type="text" name="Time"></td>
+                    <td><input type="date" name="Time"></td>
                 </tr>
                 <tr>
                     <td>Comment</td>

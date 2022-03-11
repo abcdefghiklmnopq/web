@@ -65,7 +65,7 @@ public class HistoryDBcontext extends DBContext {
             rs = stm.executeQuery();
             while (rs.next()) {
                 History h = new History();
-                h.setId(rs.getInt("ID"));
+                h.setId(rs.getLong("ID"));
                 h.setType(rs.getString("Type"));
                 h.setTime(rs.getDate("Time"));
                 h.setComment(rs.getString("Comment"));
@@ -81,7 +81,69 @@ public class HistoryDBcontext extends DBContext {
         return null;
     }
 
+    public History getOrderLast() {
+        String sql = "SELECT top 1 [ID]\n"
+                + "      ,[Type]\n"
+                + "      ,[Time]\n"
+                + "      ,[Comment]\n"
+                + "      ,[Symbol]\n"
+                + "      ,[Amount]\n"
+                + "      ,[email]\n"
+                + "  FROM [history]\n"
+                + "  order by [Time] desc";
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            stm = connection.prepareStatement(sql);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                History h = new History();
+                h.setId(rs.getLong("ID"));
+                h.setType(rs.getString("Type"));
+                h.setTime(rs.getDate("Time"));
+                h.setComment(rs.getString("Comment"));
+                h.setSymbol(rs.getString("Symbol"));
+                h.setAmount(rs.getFloat("Amount"));
+                h.setEmail(rs.getString("email"));
+                return h;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HistoryDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
     public void insertOrder(History h) {
+        String sql = "INSERT INTO [history]\n"
+                + "           ([ID]\n"
+                + "           ,[Type]\n"
+                + "           ,[Time]\n"
+                + "           ,[Comment]\n"
+                + "           ,[Symbol]\n"
+                + "           ,[Amount]\n"
+                + "           ,[email])\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?)";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setFloat(1, h.getId());
+            stm.setString(2, h.getType());
+            stm.setString(3, h.getComment());
+            stm.setString(4, h.getSymbol());
+            stm.setFloat(5, h.getAmount());
+            stm.setString(6, h.getEmail());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(HistoryDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
