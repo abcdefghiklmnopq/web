@@ -65,7 +65,7 @@ public class HistoryDBcontext extends DBContext {
             rs = stm.executeQuery();
             while (rs.next()) {
                 History h = new History();
-                h.setId(rs.getLong("ID"));
+                h.setId(rs.getInt("ID"));
                 h.setType(rs.getString("Type"));
                 h.setTime(rs.getDate("Time"));
                 h.setComment(rs.getString("Comment"));
@@ -82,7 +82,7 @@ public class HistoryDBcontext extends DBContext {
     }
 
     public History getOrderLast() {
-        String sql = "SELECT top 1 [ID]\n"
+        String sql = "SELECT top 1  [ID]\n"
                 + "      ,[Type]\n"
                 + "      ,[Time]\n"
                 + "      ,[Comment]\n"
@@ -90,7 +90,7 @@ public class HistoryDBcontext extends DBContext {
                 + "      ,[Amount]\n"
                 + "      ,[email]\n"
                 + "  FROM [history]\n"
-                + "  order by [Time] desc";
+                + "  order by [ID] desc";
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
@@ -98,7 +98,7 @@ public class HistoryDBcontext extends DBContext {
             rs = stm.executeQuery();
             if (rs.next()) {
                 History h = new History();
-                h.setId(rs.getLong("ID"));
+                h.setId(rs.getInt("ID"));
                 h.setType(rs.getString("Type"));
                 h.setTime(rs.getDate("Time"));
                 h.setComment(rs.getString("Comment"));
@@ -109,6 +109,12 @@ public class HistoryDBcontext extends DBContext {
             }
         } catch (SQLException ex) {
             Logger.getLogger(HistoryDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(HistoryDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return null;
@@ -131,16 +137,19 @@ public class HistoryDBcontext extends DBContext {
                 + "           ,?\n"
                 + "           ,?\n"
                 + "           ,?)";
-        PreparedStatement stm = null;
+        PreparedStatement stmm = null;
         try {
-            stm = connection.prepareStatement(sql);
-            stm.setFloat(1, h.getId());
-            stm.setString(2, h.getType());
-            stm.setString(3, h.getComment());
-            stm.setString(4, h.getSymbol());
-            stm.setFloat(5, h.getAmount());
-            stm.setString(6, h.getEmail());
-            stm.executeUpdate();
+            stmm = connection.prepareStatement(sql);
+            int a = (int) h.getId();
+            System.out.println("a"+a);
+            stmm.setInt(1, a);
+            stmm.setString(2, h.getType());
+            stmm.setDate(3, h.getTime());
+            stmm.setString(4, h.getComment());
+            stmm.setString(5, h.getSymbol());
+            stmm.setFloat(6, h.getAmount());
+            stmm.setString(7, h.getEmail());
+            stmm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(HistoryDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         }

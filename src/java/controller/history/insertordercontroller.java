@@ -36,14 +36,22 @@ public class insertordercontroller extends BaseAuthController {
         Account a = (Account) request.getSession().getAttribute("account");
         HistoryDBcontext hdb = new HistoryDBcontext();
         History h= hdb.getOrderLast();
-        long id = h.getId()+1;
+        int id = h.getId()+1;
+        System.out.println("id"+ id);
         String Type =request.getParameter("Type");
         String Time = request.getParameter("Time");
         String Comment = request.getParameter("Comment");
         String Symbol = request.getParameter("Symbol");
         String Amount= request.getParameter("Amount");
         String email = a.getEmail();
-        hdb.insertOrder(h);
+        History x = new History();
+        x.setId(id);
+        x.setType(Type);
+        x.setComment(Comment);
+        x.setSymbol(Symbol);
+        x.setAmount(Float.parseFloat(Amount));
+        x.setEmail(email);
+        hdb.insertOrder(x);
 //        request.getRequestDispatcher("search").forward(request, response);
         response.sendRedirect("search");
     
