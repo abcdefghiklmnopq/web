@@ -66,13 +66,7 @@ public class tickercontroller extends BaseAuthController {
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
 
-    /**
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
+
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -87,7 +81,6 @@ public class tickercontroller extends BaseAuthController {
         request.getSession().setAttribute("volume", a.getVolume());
         request.setAttribute("a", "a");
         request.setAttribute("list", list);
-       
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
 

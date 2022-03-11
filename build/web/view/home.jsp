@@ -171,7 +171,7 @@
                                 <option value="12" <%=elastedtime.equals("12") ? "selected=\"selected\"" : ""%>>12h</option>
                                 <option value="24" <%=elastedtime.equals("24") ? "selected=\"selected\"" : ""%>>24h</option>
                             </select> &emsp;Elasted Time <br>
-                            <input type="text"  value="0" id="number" /> so phut troi qua!
+                            <input type="text"  value="0" id="number" /> so gio troi qua!
                             <input type="submit"  value="Start" onclick="Stat();"/>
                             <input type="button"  value="End" onclick="Stop();"/>
                         </form>
