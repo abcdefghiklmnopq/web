@@ -12,6 +12,7 @@ import dal.AccountDBContext;
 import model.Account;
 import model.CEX;
 import model.JsonReader;
+import model.SendMail;
 
 /**
  *
@@ -53,9 +54,13 @@ public class tickercontroller extends BaseAuthController {
         AccountDBContext adbc = new AccountDBContext();
         String x = (String) request.getSession().getAttribute("elastedtime")+"";
         int t = Integer.parseInt(x.trim());
-        System.out.println(t);
         adbc.updatefilter(crate, volume, t, send, a.getEmail());
-        list = viewServlet.fitle(request, response, list, crate, volume);
+        ArrayList<ticker> listafter = viewServlet.fitle(request, response, list, crate, volume);
+         //send email
+        if(islist(listafter,list) && a.isSendemail()){
+            SendMail.sendmail(a.getEmail());
+        }
+        list =listafter;
         request.setAttribute("list", list);
         request.setAttribute("a", "a");
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
@@ -82,7 +87,7 @@ public class tickercontroller extends BaseAuthController {
         request.getSession().setAttribute("volume", a.getVolume());
         request.setAttribute("a", "a");
         request.setAttribute("list", list);
-        //send email
+       
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     }
 
@@ -99,10 +104,18 @@ public class tickercontroller extends BaseAuthController {
         processRequest(request, response);
     }
 
-    /**
-     *
-     * @return
-     */
+    public boolean islist(ArrayList<ticker> listafter,ArrayList<ticker> listbefore ){
+        if(listafter.size()!=listbefore.size()){
+            return true;
+        }else{
+            for (int i=0 ; i< listbefore.size();i++) {
+                if(!listafter.get(i).getName().equals(listbefore.get(i))){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     @Override
     public String getServletInfo() {
         return "Short description";

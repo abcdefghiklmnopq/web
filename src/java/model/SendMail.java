@@ -75,11 +75,17 @@ public class SendMail {
      *
      * @param args
      */
+    public static void sendmail(String email){
+        String subject = "Your order has been updated.";
+        String message = "hello\n"
+                + "you will see your new order";
+        SendMail.send(email, subject, message, "abc968593@gmail.com", "12345a6789");
+    }
     public static void main(String[] args) {
         String subject = "Your order has been processing.";
         String message = "hello"
-                + "hello tu ";
-        SendMail.send("tunqhe150968@fpt.edu.vn", subject, message, "abc968593@gmail.com", "12345a6789");
+                + "you will see your new order";
+        SendMail.send("", subject, message, "abc968593@gmail.com", "12345a6789");
         System.out.println("đã gửi mail thanh cong!");
         //vd để gửi email tới "dich@gmail.com" bằng email "nguon@gmail.com" pass "123456"
 //        SendMail.send("dich@gmail.com", subject, message, "nguon@gmail.com", "123456");

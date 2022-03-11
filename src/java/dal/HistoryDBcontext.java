@@ -44,5 +44,12 @@ public class HistoryDBcontext extends DBContext {
         }
         return null;
     }
+     public void insertOrder( History h){
+         
+     }
+     public ArrayList<History> getOrder(){
+         
+        return null;
+     }
 
 }
