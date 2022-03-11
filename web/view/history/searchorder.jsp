@@ -4,6 +4,7 @@
     Author     : thand
 --%>
 
+<%@page import="model.Account"%>
 <%@page import="model.History"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,14 +13,15 @@
     <head>
         <%
             ArrayList<History> historys = (ArrayList<History>) request.getAttribute("historys");
-
+            Account a = (Account) request.getSession().getAttribute("account");
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-
+        <h1>Hello <%=(a.getLastname()+"&nbsp;"+a.getFirstname())%>!</h1>
+        <h1><a href="insertorder"> Add Order</a></h1>
+        <br>
         <table border="1">
             <thead>
                 <tr>

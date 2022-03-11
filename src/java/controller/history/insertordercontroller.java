@@ -26,7 +26,7 @@ public class insertordercontroller extends BaseAuthController {
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        request.getRequestDispatcher("view/insertorder.jsp").forward(request, response);
+        request.getRequestDispatcher("view/history/insertorder.jsp").forward(request, response);
     }
 
    
@@ -34,13 +34,16 @@ public class insertordercontroller extends BaseAuthController {
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String Type=request.getParameter("Type");
+        String Time = request.getParameter("Time");
+        String Comment = request.getParameter("Comment");
+        String Symbol = request.getParameter("Symbol");
+        String Amount= request.getParameter("Amount");
+        
+        
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    
     @Override
     public String getServletInfo() {
         return "Short description";
