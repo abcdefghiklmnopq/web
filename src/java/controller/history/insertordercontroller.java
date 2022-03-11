@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.History;
 import controller.BaseAuthController;
+import java.sql.Date;
 import model.Account;
 
 /**
@@ -37,22 +38,22 @@ public class insertordercontroller extends BaseAuthController {
         HistoryDBcontext hdb = new HistoryDBcontext();
         History h= hdb.getOrderLast();
         int id = h.getId()+1;
-        System.out.println("id"+ id);
         String Type =request.getParameter("Type");
         String Time = request.getParameter("Time");
         String Comment = request.getParameter("Comment");
         String Symbol = request.getParameter("Symbol");
         String Amount= request.getParameter("Amount");
         String email = a.getEmail();
+        Date date = Date.valueOf(Time);
         History x = new History();
         x.setId(id);
         x.setType(Type);
         x.setComment(Comment);
+        x.setTime(date);
         x.setSymbol(Symbol);
         x.setAmount(Float.parseFloat(Amount));
         x.setEmail(email);
         hdb.insertOrder(x);
-//        request.getRequestDispatcher("search").forward(request, response);
         response.sendRedirect("search");
     
     }

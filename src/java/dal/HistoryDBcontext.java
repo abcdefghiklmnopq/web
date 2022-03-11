@@ -141,7 +141,6 @@ public class HistoryDBcontext extends DBContext {
         try {
             stmm = connection.prepareStatement(sql);
             int a = (int) h.getId();
-            System.out.println("a"+a);
             stmm.setInt(1, a);
             stmm.setString(2, h.getType());
             stmm.setDate(3, h.getTime());
