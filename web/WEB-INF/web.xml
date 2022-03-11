@@ -20,6 +20,14 @@
         <servlet-name>historycontroller</servlet-name>
         <servlet-class>controller.history.historycontroller</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>insertordercontroller</servlet-name>
+        <servlet-class>controller.history.insertordercontroller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchController</servlet-name>
+        <servlet-class>controller.history.SearchController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>historycontroller</servlet-name>
         <url-pattern>/history</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>insertordercontroller</servlet-name>
+        <url-pattern>/insertorder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchController</servlet-name>
+        <url-pattern>/search</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

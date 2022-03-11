@@ -9,34 +9,31 @@ import dal.HistoryDBcontext;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Account;
 import model.History;
+import controller.BaseAuthController;
+import model.Account;
 
 /**
  *
  * @author thand
  */
-public class historycontroller extends HttpServlet {
-
-  
+public class insertordercontroller extends BaseAuthController {
 
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Account a= (Account) request.getSession().getAttribute("account");
-        HistoryDBcontext hdb = new HistoryDBcontext();
-        ArrayList<History> historys = hdb.getdatalinechart("12345a@gmail.com");
-        request.setAttribute("historys", historys);
-        request.getRequestDispatcher("view/history/history.jsp").forward(request, response);
+        
+        request.getRequestDispatcher("view/insertorder.jsp").forward(request, response);
     }
 
+   
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
     }
 
     /**
