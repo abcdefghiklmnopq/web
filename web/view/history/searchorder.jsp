@@ -14,12 +14,16 @@
         <%
             ArrayList<History> historys = (ArrayList<History>) request.getAttribute("historys");
             Account a = (Account) request.getSession().getAttribute("account");
+            Integer pageindex = (Integer) request.getAttribute("pageindex");
+            Integer totalpage = (Integer) request.getAttribute("totalpage");
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <script src="js/searchorder.js" type="text/javascript"></script>
+        <link href="css/searchorder.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Hello <%=(a.getLastname()+"&nbsp;"+a.getFirstname())%>!</h1>
+        <h1>Wellcome <%=(a.getLastname() + "&nbsp;" + a.getFirstname())%>!</h1>
         <h1><a href="insertorder"> Add Order</a></h1>
         <br>
         <table border="1">
@@ -47,6 +51,10 @@
 
             </tbody>
         </table>
+        <div id="paggerbot" class="pagger"> abcd</div>
+        <script>
+            pagger("paggerbot",<%=pageindex%>,<%=totalpage%>, 3);
+        </script>
 
 
     </body>

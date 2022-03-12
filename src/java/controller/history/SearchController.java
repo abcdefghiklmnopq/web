@@ -10,7 +10,6 @@ import dal.HistoryDBcontext;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Account;
@@ -25,8 +24,17 @@ public class SearchController extends BaseAuthController {
             throws ServletException, IOException {
         Account a = (Account) request.getSession().getAttribute("account");
         HistoryDBcontext hdb = new HistoryDBcontext();
-        ArrayList<History> historys = hdb.getOrder("12345a@gmail.com");
+        int pagesize = 10;
+        String page = request.getParameter("page");
+        if(page ==null || page.trim().length() ==0)
+            page= "1";
+        int pageindex =Integer.parseInt(page);
+        ArrayList<History> historys = hdb.getOrder("12345a@gmail.com",pageindex, pagesize);
         request.setAttribute("historys", historys);
+        int count = hdb.count();
+        int totalpage = (count%pagesize==0)?(count/pagesize):(count / pagesize)+1;
+        request.setAttribute("totalpage", totalpage);
+        request.setAttribute("pageindex", pageindex);
         request.getRequestDispatcher("view/history/searchorder.jsp").forward(request, response);
     }
 
@@ -36,11 +44,7 @@ public class SearchController extends BaseAuthController {
         
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    
     @Override
     public String getServletInfo() {
         return "Short description";

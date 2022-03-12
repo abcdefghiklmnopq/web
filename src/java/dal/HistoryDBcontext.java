@@ -45,23 +45,30 @@ public class HistoryDBcontext extends DBContext {
         return null;
     }
 
-    public ArrayList<History> getOrder(String email) {
-        String sql = "SELECT  [ID]\n"
+    public ArrayList<History> getOrder(String email, int pageindex, int pagesize) {
+        String sql = "SELECT [ID]\n"
                 + "      ,[Type]\n"
                 + "      ,[Time]\n"
                 + "      ,[Comment]\n"
                 + "      ,[Symbol]\n"
                 + "      ,[Amount]\n"
-                + "      ,[email]\n"
+                + "      ,[email] FROM\n"
+                + "(SELECT  *\n"
+                + "	  , ROW_NUMBER() OVER ( order by [Time] desc) as row_index\n"
                 + "  FROM [history]\n"
-                + "  where email=?"
-                + " order by [Time] desc";
+                + "  where email =?\n"
+                + "  ) tb\n"
+                + "  where row_index >=(?-1)*? + 1  and row_index <=?*?";
         ArrayList<History> historys = new ArrayList<>();
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             stm = connection.prepareStatement(sql);
             stm.setString(1, email);
+            stm.setInt(2, pageindex);
+            stm.setInt(3, pagesize);
+            stm.setInt(4, pageindex);
+            stm.setInt(5, pagesize);
             rs = stm.executeQuery();
             while (rs.next()) {
                 History h = new History();
@@ -152,7 +159,20 @@ public class HistoryDBcontext extends DBContext {
         } catch (SQLException ex) {
             Logger.getLogger(HistoryDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
+    public int count() {
+        try {
+            String sql = "SELECT COUNT(*) as Total FROM  [history]\n"
+                    + "  where email ='12345a@gmail.com'";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("Total");
+            }
+        } catch (SQLException ex) {
+        }
+        return -1;
     }
 
 }

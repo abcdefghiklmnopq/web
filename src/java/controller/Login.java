@@ -32,7 +32,6 @@ public class Login extends HttpServlet {
         response.sendRedirect("view/login.jsp");
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,14 +39,14 @@ public class Login extends HttpServlet {
         String password = request.getParameter("password");
         AccountDBContext adb = new AccountDBContext();
         Account a = adb.getAccount(email, password);
-        if(a!=null){
+        if (a != null) {
             request.getSession().setAttribute("account", a);
-            response.sendRedirect("insertorder");
-        }else{
+            response.sendRedirect("search");
+        } else {
             request.getSession().setAttribute("account", null);
             response.sendRedirect("view/createaccount.jsp");
         }
-        
+
     }
 
     @Override
