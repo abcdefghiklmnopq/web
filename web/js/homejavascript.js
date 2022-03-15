@@ -5,7 +5,7 @@
  */
 var hour = document.getElementById("elastedtime").value;
 function change(){
-    hour = document.getElementById("elastedtime").value
+    hour = document.getElementById("elastedtime").value;
     alert(hour);
 }        
 

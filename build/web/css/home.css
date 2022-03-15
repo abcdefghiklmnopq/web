@@ -26,11 +26,11 @@ body{
     max-width: 500px;
 }
 div{
-    padding: 20px;
+    padding: 15px;
 }
 .form{
     border-style:solid;
-    padding: 1spx;
+    padding: 10px;
     border-color: #002752;
     margin: 10px;
 }
