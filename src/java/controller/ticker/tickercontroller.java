@@ -76,7 +76,8 @@ public class tickercontroller extends BaseAuthController {
         request.getSession().setAttribute("cexs", cexs);
         request.getSession().setAttribute("list", list);
         list = viewServlet.fitle(request, response, list, a.getChangerate(), a.getVolume());
-        request.getSession().setAttribute("elastedtime", a.getTime());
+        String y = String.valueOf(a.getTime());
+        request.getSession().setAttribute("elastedtime", y);
         request.getSession().setAttribute("crate", a.getChangerate());
         request.getSession().setAttribute("volume", a.getVolume());
         request.setAttribute("a", "a");

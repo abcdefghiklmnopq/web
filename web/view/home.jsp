@@ -69,7 +69,7 @@
     >
 
     <div class="select">
-<!--        <form action="viewServlet" method="POST" >-->
+        <form action="viewServlet" method="POST" >
             Market Type:&emsp;
             <select name="markettype">
 
@@ -89,8 +89,8 @@
                         <%}%>
                         > kukoin </option>
             </select>
-                        &emsp;&emsp;<input type="button"  value="Search" />
-        <!--</form>-->
+                        &emsp;&emsp;<input type="submit"  value="Search" />
+        </form>
     </div>
     <%if (list.size() != 0) {%>
     <div class="row">
