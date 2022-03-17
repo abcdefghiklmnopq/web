@@ -55,7 +55,7 @@
     <link rel="stylesheet" href="assets/css/owl.css">
 </head>
 <body>
-    <h1>Wellcome <%=(a.getLastname() + "&nbsp;" + a.getFirstname())%>!</h1>
+    <h1>Wellcome <%=(a.getFirstname()  + a.getLastname())%>!</h1>
     <h1><a href="history"> View history on line chart!</a></h1>
     <h1><a href="insertorder"> Add Order</a></h1>
 
@@ -80,7 +80,7 @@
                 <td><%=h.getSymbol()%></td>
                 <td><%=h.getAmount()%></td>
                 <td><%=h.getComment()%></td>
-                <td>&emsp;<a href="Update?id=<%=h.getId()%>">Edit</a>&emsp;
+                <td>&emsp;<a href="updateHistory?id=<%=h.getId()%>">Edit</a>&emsp;
                     <a href="#" onclick="deleteStudent(<%=h.getId()%>)">Delete</a>&emsp;
                 </td>
             </tr>

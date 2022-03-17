@@ -48,7 +48,7 @@
         <link rel="stylesheet" href="assets/css/owl.css">
     </head>
     <body>
-        <h1>Wellcome <%=(a.getLastname() + "&nbsp;" + a.getFirstname())%>!</h1>
+        <h1>Wellcome <%=( a.getFirstname() + a.getLastname())%>!</h1>
         <table border="1">
 
             <tbody>

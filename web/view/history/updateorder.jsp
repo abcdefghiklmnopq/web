@@ -1,9 +1,10 @@
 <%-- 
-    Document   : insertorder
-    Created on : Mar 11, 2022, 9:42:13 PM
+    Document   : updateorder
+    Created on : Mar 17, 2022, 10:26:31 PM
     Author     : thand
 --%>
 
+<%@page import="model.History"%>
 <%@page import="model.Account"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,6 +12,7 @@
     <head>
         <%
             Account a = (Account) request.getSession().getAttribute("account");
+            History h =(History) request.getAttribute("h");
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -49,30 +51,36 @@
     </head>
     <body>
         <h1>Wellcome <%=( a.getFirstname() + a.getLastname())%>!</h1>
+        
         <table border="1">
 
             <tbody>
-            <form name="form" action="insertorder" method="POST">
-
+            <form name="form" action="updateHistory" method="POST">
+                <tr>
+                    <td>ID: </td>
+                    <td><%=h.getId()%>
+                        <input type="hidden" name="id" value="<%=h.getId()%>" /> <br/>
+                    </td>
+                </tr>
                 <tr>
                     <td>Type: </td>
-                    <td><input type="text" name="Type"></td>
+                    <td><input type="text" name="Type" value="<%=h.getType()%>" ></td>
                 </tr>
                 <tr>
                     <td>Time</td>
-                    <td><input type="date" name="Time"></td>
+                    <td><input type="date" name="Time" value="<%=h.getTime()%>"></td>
                 </tr>
                 <tr>
                     <td>Comment</td>
-                    <td><input type="text" name="Comment"></td>
+                    <td><input type="text" name="Comment" value="<%=h.getComment()%>" ></td>
                 </tr>
                 <tr>
                     <td>Symbol</td>
-                    <td><input type="text" name="Symbol"></td>
+                    <td><input type="text" name="Symbol" value="<%=h.getSymbol()%>" ></td>
                 </tr>
                 <tr>
                     <td>Amount</td>
-                    <td><input type="text" name="Amount"></td>
+                    <td><input type="text" name="Amount" value="<%=h.getAmount()%>"></td>
                 </tr>
                 <tr>
                     <td></td>

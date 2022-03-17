@@ -5,12 +5,16 @@
  */
 package controller.history;
 
+import dal.HistoryDBcontext;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Account;
+import model.History;
 
 /**
  *
@@ -19,38 +23,42 @@ import javax.servlet.http.HttpServletResponse;
 public class updateHistory extends HttpServlet {
 
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        HistoryDBcontext hdb = new HistoryDBcontext();
+        History h= hdb.getOrder(id);
+        request.setAttribute("h", h);
+        request.getRequestDispatcher("view/history/updateorder.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Account a = (Account) request.getSession().getAttribute("account");
+        HistoryDBcontext hdb = new HistoryDBcontext();
+        int id = Integer.parseInt(request.getParameter("id"));
+        String Type =request.getParameter("Type");
+        String Time = request.getParameter("Time");
+        String Comment = request.getParameter("Comment");
+        String Symbol = request.getParameter("Symbol");
+        String Amount= request.getParameter("Amount");
+        String email = a.getEmail();
+        Date date = Date.valueOf(Time);
+        History x = new History();
+        x.setId(id);
+        x.setType(Type);
+        x.setComment(Comment);
+        x.setTime(date);
+        x.setSymbol(Symbol);
+        x.setAmount(Float.parseFloat(Amount));
+        x.setEmail(email);
+        hdb.updateOrder(x);
+        response.sendRedirect("search");
+
     }
 
     /**

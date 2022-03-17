@@ -117,13 +117,12 @@ public class HistoryDBcontext extends DBContext {
         } catch (SQLException ex) {
             Logger.getLogger(HistoryDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-                 if (stm != null) {
+            if (stm != null) {
                 try {
                     stm.close();
                 } catch (SQLException ex) {
                 }
             }
-
         }
 
         return null;
@@ -202,12 +201,26 @@ public class HistoryDBcontext extends DBContext {
             }
         }
     }
-        public void updateOrder(History h) {
-        String sql = "";
+
+    public void updateOrder(History h) {
+        String sql = "UPDATE [history]\n"
+                + "   SET [Type] = ?\n"
+                + "      ,[Time] = ?\n"
+                + "      ,[Comment] = ?\n"
+                + "      ,[Symbol] = ?\n"
+                + "      ,[Amount] = ?\n"
+                + "      ,[email] = ?\n"
+                + " WHERE ID=?";
         PreparedStatement stm = null;
         try {
             stm = connection.prepareStatement(sql);
-            stm.setInt(1, h.getId());
+            stm.setString(1, h.getType());
+            stm.setDate(2, h.getTime());
+            stm.setString(3, h.getComment());
+            stm.setString(4, h.getSymbol());
+            stm.setFloat(5, h.getAmount());
+            stm.setString(6, h.getEmail());
+            stm.setInt(7, h.getId());
             stm.executeUpdate();
         } catch (SQLException ex) {
         } finally {
@@ -225,6 +238,51 @@ public class HistoryDBcontext extends DBContext {
                 }
             }
         }
+    }
+
+    public History getOrder(int id) {
+        String sql = "SELECT [ID]\n"
+                + "      ,[Type]\n"
+                + "      ,[Time]\n"
+                + "      ,[Comment]\n"
+                + "      ,[Symbol]\n"
+                + "      ,[Amount]\n"
+                + "      ,[email]\n"
+                + "  FROM [history]\n"
+                + "  where ID=?";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                History h = new History();
+                h.setId(rs.getInt("ID"));
+                h.setType(rs.getString("Type"));
+                h.setTime(rs.getDate("Time"));
+                h.setComment(rs.getString("Comment"));
+                h.setSymbol(rs.getString("Symbol"));
+                h.setAmount(rs.getFloat("Amount"));
+                h.setEmail(rs.getString("email"));
+                return h;
+            }
+        } catch (SQLException ex) {
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                }
+            }
+        }
+        return null;
     }
 
 }
