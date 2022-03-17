@@ -5,6 +5,7 @@
  */
 package controller.history;
 
+import controller.BaseAuthController;
 import dal.HistoryDBcontext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,12 +21,12 @@ import model.History;
  *
  * @author thand
  */
-public class updateHistory extends HttpServlet {
+public class updateHistory extends BaseAuthController {
 
 
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         HistoryDBcontext hdb = new HistoryDBcontext();
@@ -36,7 +37,7 @@ public class updateHistory extends HttpServlet {
 
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Account a = (Account) request.getSession().getAttribute("account");
         HistoryDBcontext hdb = new HistoryDBcontext();
@@ -70,5 +71,7 @@ public class updateHistory extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+
 
 }
