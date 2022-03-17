@@ -117,11 +117,13 @@ public class HistoryDBcontext extends DBContext {
         } catch (SQLException ex) {
             Logger.getLogger(HistoryDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                stm.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(HistoryDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+                 if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                }
             }
+
         }
 
         return null;
