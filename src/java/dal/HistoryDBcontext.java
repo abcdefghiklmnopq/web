@@ -175,4 +175,54 @@ public class HistoryDBcontext extends DBContext {
         return -1;
     }
 
+    public void deleteOrder(History h) {
+        String sql = "DELETE FROM [history] \n"
+                + "      WHERE ID=?";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, h.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                }
+            }
+        }
+    }
+        public void updateOrder(History h) {
+        String sql = "";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, h.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                }
+            }
+        }
+    }
+
 }

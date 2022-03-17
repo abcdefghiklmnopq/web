@@ -28,6 +28,14 @@
         <servlet-name>SearchController</servlet-name>
         <servlet-class>controller.history.SearchController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteHistory</servlet-name>
+        <servlet-class>controller.history.DeleteHistory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateHistory</servlet-name>
+        <servlet-class>controller.history.updateHistory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>SearchController</servlet-name>
         <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteHistory</servlet-name>
+        <url-pattern>/DeleteHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateHistory</servlet-name>
+        <url-pattern>/updateHistory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
