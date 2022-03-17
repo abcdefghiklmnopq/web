@@ -109,8 +109,8 @@ public class NewFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         String url = req.getServletPath();
         if(url.endsWith(".jsp") && !url.endsWith("Error.jsp")
-                && !url.endsWith("login.jsp")
-                && !url.endsWith("createaccount.jsp")){
+                && !url.endsWith("/login.jsp")
+                && !url.endsWith("/createaccount.jsp")){
             res.sendRedirect("/Assignment/viewServlet");
         }
         Throwable problem = null;
