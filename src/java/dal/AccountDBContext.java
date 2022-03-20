@@ -80,7 +80,6 @@ public class AccountDBContext extends DBContext {
         return null;
     }
 
-
     public boolean IsEmail(String email) {
         String sql = "SELECT [email]\n"
                 + "  FROM [account] a\n"
@@ -134,6 +133,13 @@ public class AccountDBContext extends DBContext {
                 + "           ,?\n"
                 + "           ,?\n"
                 + "           )";
+        String sqlInsert_Group = "INSERT INTO [account_Group]\n"
+                + "           ([email]\n"
+                + "           ,[gid])\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           ,3)";
+        PreparedStatement stminsert_Group = null;
         PreparedStatement stminsert = null;
         try {
             stminsert = connection.prepareStatement(sql);
@@ -145,14 +151,16 @@ public class AccountDBContext extends DBContext {
             stminsert.setDate(6, s.getDob());
             stminsert.setString(7, s.getPassword());
             stminsert.executeUpdate();
+            
+            stminsert_Group = connection.prepareStatement(sql);
+            stminsert_Group.setString(1, s.getEmail());
+            stminsert_Group.executeUpdate();
+            
         } catch (SQLException ex) {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 
             try {
-                if (stminsert != null) {
-                    stminsert.close();
-                }
                 if (connection != null) {
                     connection.close();
                 }
@@ -163,14 +171,6 @@ public class AccountDBContext extends DBContext {
         }
     }
 
-    /**
-     *
-     * @param Changerate
-     * @param Volume
-     * @param time
-     * @param sendemail
-     * @param email
-     */
     public void updatefilter(String Changerate, String Volume, int time, boolean sendemail, String email) {
         String sql = "UPDATE [account]\n"
                 + "   SET \n"
@@ -201,17 +201,27 @@ public class AccountDBContext extends DBContext {
             } catch (SQLException ex) {
             }
         }
-
     }
 
-    /**
-     *
-     * @param email
-     * @param url
-     * @return
-     */
     public int getPermission(String email, String url) {
-        return 1;
+        try {
+            String sql = "SELECT COUNT(*) as Total FROM\n"
+                    + "            Account a INNER JOIN Account_Group ag ON a.email = ag.email\n"
+                    + "            		  INNER JOIN [Group] g ON g.gid = ag.gid\n"
+                    + "            		  INNER JOIN Group_Feature gf ON gf.gid = g.gid\n"
+                    + "            		  INNER JOIN Feature f ON f.fid = gf.fid\n"
+                    + "            WHERE a.email = ? AND f.url= ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, email);
+            stm.setString(2, url);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("Total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 
 }
