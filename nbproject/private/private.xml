@@ -12,9 +12,9 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/src/java/controller/history/DeleteHistory.java</file>
-            <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/web/view/home.jsp</file>
-            <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/web/view/history/searchorder.jsp</file>
+            <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/src/java/dal/AccountDBContext.java</file>
+            <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/src/java/controller/history/insertordercontroller.java</file>
+            <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/src/java/controller/history/updateHistory.java</file>
             <file>file:/C:/Users/thand/OneDrive/Documents/NetBeansProjects/Assignment/src/java/dal/HistoryDBcontext.java</file>
         </group>
     </open-files>

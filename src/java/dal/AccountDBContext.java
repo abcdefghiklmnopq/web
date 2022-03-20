@@ -80,11 +80,7 @@ public class AccountDBContext extends DBContext {
         return null;
     }
 
-    /**
-     *
-     * @param email
-     * @return
-     */
+
     public boolean IsEmail(String email) {
         String sql = "SELECT [email]\n"
                 + "  FROM [account] a\n"
