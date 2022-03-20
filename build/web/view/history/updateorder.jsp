@@ -33,7 +33,7 @@
                         <a class="nav-link active" href="search">history</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="view/login.jsp">login</a>
+                        <a class="nav-link" href="logout">logout</a>
                     </li>
             </div>
         </div>

@@ -56,7 +56,11 @@
                         <a class="nav-link" href="search">history</a>
                     </li>
                     <li class="nav-item">
+                        <%if(account==null){%>
                         <a class="nav-link" href="view/login.jsp">login</a>
+                        <%}else{%>
+                        <a class="nav-link" href="logout">logout</a>
+                        <%}%>
                     </li>
             </div>
         </div>

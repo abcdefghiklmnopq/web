@@ -41,10 +41,10 @@ public class Login extends HttpServlet {
         Account a = adb.getAccount(email, password);
         if (a != null) {
             request.getSession().setAttribute("account", a);
-            response.sendRedirect("search");
+            response.sendRedirect("viewServlet");
         } else {
             request.getSession().setAttribute("account", null);
-            response.sendRedirect("view/createaccount.jsp");
+            response.sendRedirect("view/login.jsp");
         }
 
     }

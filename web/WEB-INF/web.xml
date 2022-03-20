@@ -45,8 +45,8 @@
         <servlet-class>controller.history.updateHistory</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Authorization</servlet-name>
-        <servlet-class>controller.Authorization</servlet-class>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>controller.logout</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -85,8 +85,8 @@
         <url-pattern>/updateHistory</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Authorization</servlet-name>
-        <url-pattern>/Authorization</url-pattern>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
